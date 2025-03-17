@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "My2FalFCujw=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\TOP\\Desktop\\cosmeticsClinc\\cosmeticClinic.Backend\\cosmeticClinic.api\\cosmeticClinic.api.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\TOP\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.3\\microsoft.aspnetcore.openapi.9.0.3.nupkg.sha512",
+    "C:\\Users\\TOP\\.nuget\\packages\\microsoft.openapi\\1.6.17\\microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}
