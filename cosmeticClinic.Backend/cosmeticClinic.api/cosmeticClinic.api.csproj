@@ -5,10 +5,24 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <RootNamespace>cosmeticClinic.Backend</RootNamespace>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <NoWarn>$(NoWarn);1591</NoWarn>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.3"/>
+        <PackageReference Include="FluentValidation" Version="12.0.0-preview1" />
+        <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="8.0.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="8.0.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="8.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\cosmeticClinic.Business\cosmeticClinic.Business.csproj" />
+      <ProjectReference Include="..\cosmeticClinic.Mappers\cosmeticClinic.Mappers.csproj" />
+      <ProjectReference Include="..\cosmeticClinic.Settings\cosmeticClinic.Settings.csproj" />
+      <ProjectReference Include="..\cosmeticClinic.Validation\cosmeticClinic.Validation.csproj" />
     </ItemGroup>
 
 </Project>

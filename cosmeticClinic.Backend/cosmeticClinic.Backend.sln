@@ -4,6 +4,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cosmeticClinic.api", "cosme
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cosmeticClinic.Entities", "cosmeticClinic.Entities\cosmeticClinic.Entities.csproj", "{27B8000D-F1F1-490D-9237-2751EF77AA74}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cosmeticClinic.Business", "cosmeticClinic.Business\cosmeticClinic.Business.csproj", "{451E4E7A-878B-43D8-9138-23F5E3B93CB9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cosmeticClinic.Mappers", "cosmeticClinic.Mappers\cosmeticClinic.Mappers.csproj", "{F2F63B0D-3AC6-4C4C-9C4F-CD634C92B7BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cosmeticClinic.Validation", "cosmeticClinic.Validation\cosmeticClinic.Validation.csproj", "{3B0F62BD-407B-48DC-B0FE-A1D0321E8C50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cosmeticClinic.DataAccess", "cosmeticClinic.DataAccess\cosmeticClinic.DataAccess.csproj", "{65ED59AE-B03B-4FAC-808E-5AC30C2A58E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cosmeticClinic.DTOs", "cosmeticClinic.DTOs\cosmeticClinic.DTOs.csproj", "{299700F6-710B-4E64-B27C-05CBC6C86148}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cosmeticClinic.Settings", "cosmeticClinic.Settings\cosmeticClinic.Settings.csproj", "{98B9BCA1-5C64-47FA-A70B-411EA1D4A8C2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +30,29 @@ Global
 		{27B8000D-F1F1-490D-9237-2751EF77AA74}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27B8000D-F1F1-490D-9237-2751EF77AA74}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27B8000D-F1F1-490D-9237-2751EF77AA74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{451E4E7A-878B-43D8-9138-23F5E3B93CB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{451E4E7A-878B-43D8-9138-23F5E3B93CB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{451E4E7A-878B-43D8-9138-23F5E3B93CB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{451E4E7A-878B-43D8-9138-23F5E3B93CB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2F63B0D-3AC6-4C4C-9C4F-CD634C92B7BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2F63B0D-3AC6-4C4C-9C4F-CD634C92B7BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2F63B0D-3AC6-4C4C-9C4F-CD634C92B7BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2F63B0D-3AC6-4C4C-9C4F-CD634C92B7BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B0F62BD-407B-48DC-B0FE-A1D0321E8C50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B0F62BD-407B-48DC-B0FE-A1D0321E8C50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B0F62BD-407B-48DC-B0FE-A1D0321E8C50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B0F62BD-407B-48DC-B0FE-A1D0321E8C50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65ED59AE-B03B-4FAC-808E-5AC30C2A58E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65ED59AE-B03B-4FAC-808E-5AC30C2A58E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65ED59AE-B03B-4FAC-808E-5AC30C2A58E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65ED59AE-B03B-4FAC-808E-5AC30C2A58E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{299700F6-710B-4E64-B27C-05CBC6C86148}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{299700F6-710B-4E64-B27C-05CBC6C86148}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{299700F6-710B-4E64-B27C-05CBC6C86148}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{299700F6-710B-4E64-B27C-05CBC6C86148}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98B9BCA1-5C64-47FA-A70B-411EA1D4A8C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98B9BCA1-5C64-47FA-A70B-411EA1D4A8C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98B9BCA1-5C64-47FA-A70B-411EA1D4A8C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98B9BCA1-5C64-47FA-A70B-411EA1D4A8C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
