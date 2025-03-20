@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.0" />
+      <PackageReference Include="MongoDB.Driver" Version="3.2.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\cosmeticClinic.Entities\cosmeticClinic.Entities.csproj" />
+      <ProjectReference Include="..\cosmeticClinic.Settings\cosmeticClinic.Settings.csproj" />
+    </ItemGroup>
+
+</Project>

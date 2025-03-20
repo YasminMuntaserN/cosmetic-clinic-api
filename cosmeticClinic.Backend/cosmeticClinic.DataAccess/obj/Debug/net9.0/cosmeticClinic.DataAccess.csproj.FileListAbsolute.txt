@@ -1,0 +1,17 @@
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.DataAccess\bin\Debug\net9.0\cosmeticClinic.DataAccess.deps.json
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.DataAccess\bin\Debug\net9.0\cosmeticClinic.DataAccess.dll
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.DataAccess\bin\Debug\net9.0\cosmeticClinic.DataAccess.pdb
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.DataAccess\bin\Debug\net9.0\cosmeticClinic.Entities.dll
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.DataAccess\bin\Debug\net9.0\cosmeticClinic.Settings.dll
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.DataAccess\bin\Debug\net9.0\cosmeticClinic.Entities.pdb
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.DataAccess\bin\Debug\net9.0\cosmeticClinic.Settings.pdb
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.DataAccess\obj\Debug\net9.0\cosmeticClinic.DataAccess.csproj.AssemblyReference.cache
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.DataAccess\obj\Debug\net9.0\cosmeticClinic.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.DataAccess\obj\Debug\net9.0\cosmeticClinic.DataAccess.AssemblyInfoInputs.cache
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.DataAccess\obj\Debug\net9.0\cosmeticClinic.DataAccess.AssemblyInfo.cs
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.DataAccess\obj\Debug\net9.0\cosmeticClinic.DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.DataAccess\obj\Debug\net9.0\cosmetic.153B6F36.Up2Date
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.DataAccess\obj\Debug\net9.0\cosmeticClinic.DataAccess.dll
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.DataAccess\obj\Debug\net9.0\refint\cosmeticClinic.DataAccess.dll
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.DataAccess\obj\Debug\net9.0\cosmeticClinic.DataAccess.pdb
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.DataAccess\obj\Debug\net9.0\ref\cosmeticClinic.DataAccess.dll

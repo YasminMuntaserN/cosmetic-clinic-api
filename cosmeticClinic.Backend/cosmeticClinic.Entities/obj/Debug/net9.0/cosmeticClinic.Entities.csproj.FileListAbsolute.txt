@@ -1,0 +1,12 @@
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Entities\bin\Debug\net9.0\cosmeticClinic.Entities.deps.json
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Entities\bin\Debug\net9.0\cosmeticClinic.Entities.dll
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Entities\bin\Debug\net9.0\cosmeticClinic.Entities.pdb
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Entities\obj\Debug\net9.0\cosmeticClinic.Entities.csproj.AssemblyReference.cache
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Entities\obj\Debug\net9.0\cosmeticClinic.Entities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Entities\obj\Debug\net9.0\cosmeticClinic.Entities.AssemblyInfoInputs.cache
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Entities\obj\Debug\net9.0\cosmeticClinic.Entities.AssemblyInfo.cs
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Entities\obj\Debug\net9.0\cosmeticClinic.Entities.csproj.CoreCompileInputs.cache
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Entities\obj\Debug\net9.0\cosmeticClinic.Entities.dll
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Entities\obj\Debug\net9.0\refint\cosmeticClinic.Entities.dll
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Entities\obj\Debug\net9.0\cosmeticClinic.Entities.pdb
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Entities\obj\Debug\net9.0\ref\cosmeticClinic.Entities.dll

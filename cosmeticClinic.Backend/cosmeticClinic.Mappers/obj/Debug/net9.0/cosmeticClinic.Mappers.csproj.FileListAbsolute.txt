@@ -1,0 +1,17 @@
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Mappers\bin\Debug\net9.0\cosmeticClinic.Mappers.deps.json
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Mappers\bin\Debug\net9.0\cosmeticClinic.Mappers.dll
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Mappers\bin\Debug\net9.0\cosmeticClinic.Mappers.pdb
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Mappers\bin\Debug\net9.0\cosmeticClinic.DTOs.dll
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Mappers\bin\Debug\net9.0\cosmeticClinic.Entities.dll
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Mappers\bin\Debug\net9.0\cosmeticClinic.DTOs.pdb
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Mappers\bin\Debug\net9.0\cosmeticClinic.Entities.pdb
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Mappers\obj\Debug\net9.0\cosmeticClinic.Mappers.csproj.AssemblyReference.cache
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Mappers\obj\Debug\net9.0\cosmeticClinic.Mappers.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Mappers\obj\Debug\net9.0\cosmeticClinic.Mappers.AssemblyInfoInputs.cache
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Mappers\obj\Debug\net9.0\cosmeticClinic.Mappers.AssemblyInfo.cs
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Mappers\obj\Debug\net9.0\cosmeticClinic.Mappers.csproj.CoreCompileInputs.cache
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Mappers\obj\Debug\net9.0\cosmetic.759EB030.Up2Date
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Mappers\obj\Debug\net9.0\cosmeticClinic.Mappers.dll
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Mappers\obj\Debug\net9.0\refint\cosmeticClinic.Mappers.dll
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Mappers\obj\Debug\net9.0\cosmeticClinic.Mappers.pdb
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Mappers\obj\Debug\net9.0\ref\cosmeticClinic.Mappers.dll

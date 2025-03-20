@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="AutoMapper" Version="14.0.0" />
+      <PackageReference Include="FluentValidation" Version="12.0.0-preview1" />
+      <PackageReference Include="MongoDB.Driver" Version="3.2.1" />
+      <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.6.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\cosmeticClinic.DTOs\cosmeticClinic.DTOs.csproj" />
+      <ProjectReference Include="..\cosmeticClinic.Entities\cosmeticClinic.Entities.csproj" />
+      <ProjectReference Include="..\cosmeticClinic.Settings\cosmeticClinic.Settings.csproj" />
+    </ItemGroup>
+
+</Project>

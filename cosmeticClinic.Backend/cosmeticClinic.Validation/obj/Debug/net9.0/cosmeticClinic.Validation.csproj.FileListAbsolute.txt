@@ -1,0 +1,15 @@
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Validation\bin\Debug\net9.0\cosmeticClinic.Validation.deps.json
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Validation\bin\Debug\net9.0\cosmeticClinic.Validation.dll
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Validation\bin\Debug\net9.0\cosmeticClinic.Validation.pdb
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Validation\bin\Debug\net9.0\cosmeticClinic.Entities.dll
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Validation\bin\Debug\net9.0\cosmeticClinic.Entities.pdb
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Validation\obj\Debug\net9.0\cosmeticClinic.Validation.csproj.AssemblyReference.cache
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Validation\obj\Debug\net9.0\cosmeticClinic.Validation.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Validation\obj\Debug\net9.0\cosmeticClinic.Validation.AssemblyInfoInputs.cache
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Validation\obj\Debug\net9.0\cosmeticClinic.Validation.AssemblyInfo.cs
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Validation\obj\Debug\net9.0\cosmeticClinic.Validation.csproj.CoreCompileInputs.cache
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Validation\obj\Debug\net9.0\cosmetic.672FEC19.Up2Date
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Validation\obj\Debug\net9.0\cosmeticClinic.Validation.dll
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Validation\obj\Debug\net9.0\refint\cosmeticClinic.Validation.dll
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Validation\obj\Debug\net9.0\cosmeticClinic.Validation.pdb
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Validation\obj\Debug\net9.0\ref\cosmeticClinic.Validation.dll
