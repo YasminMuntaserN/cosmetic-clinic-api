@@ -44,7 +44,7 @@ public class TreatmentsController : BaseController
     Description = "Retrieves a paginated list of Treatments. Results are ordered according to specified criteria. for example it must be[\"name\", \"category\", \"price\" ,  \"createdAt\" ]  "
     )]
     [SwaggerResponse(StatusCodes.Status200OK, "Returns paginated Treatments")]
-    public async Task<ActionResult<(IEnumerable<TreatmentDto> Data, long TotalCount, int TotalPages)>> 
+    public async Task<ActionResult<PaginatedResponseDto <TreatmentDto>>>
         GetPaginated([FromQuery] [SwaggerParameter("Pagination parameters")]
             PaginationDto pagination)
     {
