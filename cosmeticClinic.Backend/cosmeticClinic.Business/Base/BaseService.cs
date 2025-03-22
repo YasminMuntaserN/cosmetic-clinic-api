@@ -1,6 +1,7 @@
 using System.Linq.Expressions;
 using AutoMapper;
 using cosmeticClinic.Business.Interfaces;
+using cosmeticClinic.DTOs.Common;
 using FluentValidation;
 using Microsoft.Extensions.Logging;
 using MongoDB.Bson;
@@ -61,7 +62,7 @@ public abstract class BaseService<TEntity, TDto> : IBaseService<TEntity, TDto>
         }
     }
 
-    public async Task<(IEnumerable<TDto> Data, long TotalCount, int TotalPages)> GetAllAsync(
+    public async Task<PaginatedResponseDto<TDto>> GetAllAsync(
         int pageNumber,
         int pageSize,
         Expression<Func<TEntity, object>> orderBy,
@@ -84,7 +85,12 @@ public abstract class BaseService<TEntity, TDto> : IBaseService<TEntity, TDto>
                 .Limit(pageSize)
                 .ToListAsync();
 
-            return (_mapper.Map<IEnumerable<TDto>>(entities), totalCount, totalPages);
+            return new PaginatedResponseDto<TDto>
+            {
+                Data = _mapper.Map<IEnumerable<TDto>>(entities),
+                TotalCount = totalCount,
+                TotalPages = totalPages
+            };
         }
         catch (Exception ex)
         {

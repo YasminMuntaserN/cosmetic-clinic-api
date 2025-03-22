@@ -82,7 +82,7 @@ public class UserService : BaseService<User, UserDto>
     public async Task<IEnumerable<UserDto>> GetAllUsersAsync()
         => await GetAllAsync();
 
-    public async Task<(IEnumerable<UserDto> Data, long TotalCount, int TotalPages)> GetAllUsersAsync(
+    public async Task<PaginatedResponseDto<UserDto>> GetAllUsersAsync(
         int pageNumber,
         int pageSize,
         string orderBy ,

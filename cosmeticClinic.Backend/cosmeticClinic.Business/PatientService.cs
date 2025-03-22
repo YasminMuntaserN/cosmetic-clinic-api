@@ -42,10 +42,10 @@ public class PatientService : BaseService<Patient, PatientDto>
     public async Task<IEnumerable<PatientDto>> GetAllPatientsAsync()
         => await GetAllAsync();
 
-    public async Task<(IEnumerable<PatientDto> Data, long TotalCount, int TotalPages)> GetAllPatientsAsync(
+    public async Task<PaginatedResponseDto<PatientDto>> GetAllPatientsAsync(
         int pageNumber,
         int pageSize,
-        string orderBy = "LastName",
+        string orderBy,
         bool ascending = true)
     {
         Expression<Func<Patient, object>> orderByExpression = orderBy switch

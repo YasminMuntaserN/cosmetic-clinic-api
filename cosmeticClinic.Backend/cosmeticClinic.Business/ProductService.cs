@@ -42,7 +42,7 @@ public class ProductService : BaseService<Product, ProductDto>
     public async Task<IEnumerable<ProductDto>> GetAllProductsAsync()
         => await GetAllAsync();
 
-    public async Task<(IEnumerable<ProductDto> Data, long TotalCount, int TotalPages)> GetAllProductsAsync(
+    public async Task<PaginatedResponseDto <ProductDto>> GetAllProductsAsync(
         int pageNumber,
         int pageSize,
         string orderBy ,

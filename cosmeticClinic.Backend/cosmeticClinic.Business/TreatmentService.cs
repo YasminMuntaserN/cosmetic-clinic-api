@@ -42,7 +42,7 @@ public class TreatmentService : BaseService<Treatment, TreatmentDto>
     public async Task<IEnumerable<TreatmentDto>> GetAllTreatmentsAsync()
         => await GetAllAsync();
 
-    public async Task<(IEnumerable<TreatmentDto> Data, long TotalCount, int TotalPages)> GetAllTreatmentsAsync(
+    public async Task<PaginatedResponseDto<TreatmentDto>> GetAllTreatmentsAsync(
         int pageNumber,
         int pageSize,
         string orderBy ,

@@ -1,4 +1,5 @@
 using System.Linq.Expressions;
+using cosmeticClinic.DTOs.Common;
 
 namespace cosmeticClinic.Business.Interfaces;
 
@@ -6,7 +7,7 @@ public interface IBaseService<TEntity, TDto> where TEntity : class where TDto : 
 {
     Task<TDto?> FindBy(Expression<Func<TEntity, bool>> predicate);
     Task<IEnumerable<TDto>> GetAllAsync();
-    Task<(IEnumerable<TDto> Data, long TotalCount, int TotalPages)> GetAllAsync(
+    Task<PaginatedResponseDto<TDto>> GetAllAsync(
         int pageNumber,
         int pageSize,
         Expression<Func<TEntity, object>> orderBy,

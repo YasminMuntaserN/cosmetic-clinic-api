@@ -147,21 +147,27 @@ public class AuthService
                          Permission.ViewDoctors |
                          Permission.MangeDoctor |
                          Permission.DeleteDoctor |
+                         
                          Permission.ViewAppointments |
                          Permission.CreateAppointment |
                          Permission.MangeAppointment |
                          Permission.CancelAppointment |
+                         
                          Permission.ViewPatients |
                          Permission.CreatePatient |
                          Permission.MangePatient |
+                         Permission.DeletePatient |
+                         
                          Permission.ViewTreatments |
                          Permission.CreateTreatment |
                          Permission.MangeTreatment |
                          Permission.DeleteTreatment |
+                         
                          Permission.ViewProducts |
                          Permission.CreateProduct |
                          Permission.MangeProduct |
                          Permission.DeleteProduct |
+                         
                          Permission.ViewReports |
                          Permission.ManageUsers),
 
