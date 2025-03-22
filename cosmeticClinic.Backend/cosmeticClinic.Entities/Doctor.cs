@@ -23,6 +23,9 @@ public class Doctor
 
     [BsonElement("specialization")]
     public string Specialization { get; set; } = null!;
+    
+    [BsonElement("imageUrl")]
+    public string? ImageUrl { get; set; }
 
     [BsonElement("licenseNumber")]
     public string LicenseNumber { get; set; } = null!;
