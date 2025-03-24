@@ -71,19 +71,17 @@ public class PatientService : BaseService<Patient, PatientDto>
     
     public async Task<IEnumerable<PatientDto>> SearchPatientsAsync(SearchCriteriaDto criteria)
     {
-        var filter = criteria.Field switch
+        var regexFilter = criteria.Field switch
         {
-            "firstName" => Builders<Patient>.Filter.Eq(c => c.FirstName,criteria.Value),
-            "lastName" => Builders<Patient>.Filter.Eq(c => c.LastName,criteria.Value),
-            "email" => Builders<Patient>.Filter.Eq(c => c.Email,criteria.Value),
-            _ =>  Builders<Patient>.Filter.Eq("_id", ObjectId.Parse(criteria.Value)),
+            "firstName" => Builders<Doctor>.Filter.Regex(c => c.FirstName,
+                new BsonRegularExpression(criteria.Value, "i")),
+            "lastName" => Builders<Doctor>.Filter.Regex(c => c.LastName,
+                new BsonRegularExpression(criteria.Value, "i")),
+            "email" => Builders<Doctor>.Filter.Regex(c => c.Email,
+                new BsonRegularExpression(criteria.Value, "i")),
+            _ => Builders<Doctor>.Filter.Eq("_id", ObjectId.Parse(criteria.Value))
         };
 
-        if (filter != null)
-        {
-            return await SearchAsync(c => filter.Inject());
-        }
-
-        return Enumerable.Empty<PatientDto>();
+        return await SearchAsync(c => regexFilter.Inject());
     }
 }

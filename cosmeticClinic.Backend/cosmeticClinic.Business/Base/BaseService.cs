@@ -262,9 +262,8 @@ public abstract class BaseService<TEntity, TDto> : IBaseService<TEntity, TDto>
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error searching entities");
+            _logger.LogError(ex, "Error searching products");
             throw;
         }
     }
-    
 }

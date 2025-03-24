@@ -17,7 +17,7 @@ namespace cosmeticClinic.Backend.Controllers;
 public class DoctorsController : BaseController
 {
     private readonly DoctorService _doctorService;
-    private static readonly string[] SearchFields = new[] { "firstName","lastName", "createdAt", "Specialization" };
+    private static readonly string[] SearchFields = new[] { "firstName","lastName", "createdAt", "specialization" };
 
     public DoctorsController(
         ILogger<DoctorsController> logger,
@@ -77,7 +77,7 @@ public class DoctorsController : BaseController
 
     
     
-    [HttpGet("search")]
+    [HttpPost("search")]
     [RequirePermission(Permission.ViewDoctors)]
     [SwaggerOperation(Summary = "Search doctors  using specified criteria." ,
      Description = " Available search fields: FirstName , LastName ,Specialization")]

@@ -77,7 +77,7 @@ public class TreatmentsController : BaseController
     }
     
     
-    [HttpGet("search")]
+    [HttpPost("search")]
     [RequirePermission(Permission.ViewTreatments)]
     [SwaggerOperation(Summary = "Search Treatments  using specified criteria." ,
         Description = " Available search field:name")]

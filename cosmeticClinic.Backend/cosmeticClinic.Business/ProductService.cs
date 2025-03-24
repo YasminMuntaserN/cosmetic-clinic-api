@@ -42,10 +42,10 @@ public class ProductService : BaseService<Product, ProductDto>
     public async Task<IEnumerable<ProductDto>> GetAllProductsAsync()
         => await GetAllAsync();
 
-    public async Task<PaginatedResponseDto <ProductDto>> GetAllProductsAsync(
+    public async Task<PaginatedResponseDto<ProductDto>> GetAllProductsAsync(
         int pageNumber,
         int pageSize,
-        string orderBy ,
+        string orderBy,
         bool ascending = true)
     {
         Expression<Func<Product, object>> orderByExpression = orderBy switch
@@ -85,21 +85,18 @@ public class ProductService : BaseService<Product, ProductDto>
 
     public async Task<IEnumerable<ProductDto>> GetProductsByPriceRangeAsync(decimal minPrice, decimal maxPrice)
         => await SearchAsync(p => p.Price >= minPrice && p.Price <= maxPrice);
-    
+
 
     public async Task<IEnumerable<ProductDto>> SearchProductsAsync(SearchCriteriaDto criteria)
     {
-        var filter = criteria.Field switch
+        var regexFilter = criteria.Field switch
         {
-            "name" => Builders<Product>.Filter.Eq(c => c.Name,criteria.Value),
-            _ =>  Builders<Product>.Filter.Eq("_id", ObjectId.Parse(criteria.Value)),
+            "name" => Builders<Product>.Filter.Regex(p => p.Name, new BsonRegularExpression(criteria.Value, "i")),
+            "category" => Builders<Product>.Filter.Regex(p => p.Category,
+                new BsonRegularExpression(criteria.Value, "i")),
+            _ => Builders<Product>.Filter.Eq("_id", ObjectId.Parse(criteria.Value)),
         };
 
-        if (filter != null)
-        {
-            return await SearchAsync(c => filter.Inject());
-        }
-
-        return Enumerable.Empty<ProductDto>();
+        return await SearchAsync(p => regexFilter.Inject());
     }
 }

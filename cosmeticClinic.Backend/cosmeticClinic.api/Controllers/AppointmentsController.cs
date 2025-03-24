@@ -67,7 +67,7 @@ public class AppointmentsController : BaseController
             $"Successfully retrieved Appointment with ID: {id}");
     }
 
-    [HttpGet("search")]
+    [HttpPost("search")]
     [RequirePermission(Permission.ViewAppointments)]
     [SwaggerOperation(Summary = "Search Appointments using specified criteria.")]
     [SwaggerResponse(StatusCodes.Status200OK, "Returns matching Appointments", typeof(IEnumerable<AppointmentDto>))]

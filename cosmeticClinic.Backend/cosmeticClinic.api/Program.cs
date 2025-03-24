@@ -43,6 +43,7 @@ builder.Services.AddScoped<ProductService>();
 builder.Services.AddScoped<DoctorService>();
 builder.Services.AddScoped<PatientService>();
 builder.Services.AddScoped<TreatmentService>();
+builder.Services.AddScoped<AppointmentService>();
 builder.Services.AddScoped<PasswordSettings>();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
@@ -110,6 +111,19 @@ builder.Services.AddAuthentication().AddJwtBearer(JwtBearerDefaults.Authenticati
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtSettings.SignKey))
     };
+});
+
+// Register CORS policy
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowReactApp",
+        builder =>
+        {
+            builder.WithOrigins("http://localhost:5173") 
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials();
+        });
 });
 
 var app = builder.Build();

@@ -72,21 +72,18 @@ public class AppointmentService : BaseService<Appointment, AppointmentDto>
 
     public async Task<IEnumerable<AppointmentDto>> GetAppointmentsByDateRangeAsync(DateTime startDate, DateTime endDate)
         => await SearchAsync(a => a.ScheduledDateTime >= startDate && a.ScheduledDateTime <= endDate);
-    
+
     public async Task<IEnumerable<AppointmentDto>> SearchAppointmentsAsync(SearchCriteriaDto criteria)
     {
-        var filter = criteria.Field switch
+        var regexFilter = criteria.Field switch
         {
-            "patientId" => Builders<Appointment>.Filter.Eq(c => c.PatientId,criteria.Value),
-            "doctorId" => Builders<Appointment>.Filter.Eq(c => c.DoctorId,criteria.Value),
-            _ =>  Builders<Appointment>.Filter.Eq("_id", ObjectId.Parse(criteria.Value)),
+            "patientId" => Builders<Appointment>.Filter.Regex(c => c.PatientId,
+                new BsonRegularExpression(criteria.Value, "i")),
+            "doctorId" => Builders<Appointment>.Filter.Regex(c => c.DoctorId,
+                new BsonRegularExpression(criteria.Value, "i")),
+            _ => Builders<Appointment>.Filter.Eq("_id", ObjectId.Parse(criteria.Value))
         };
 
-        if (filter != null)
-        {
-            return await SearchAsync(c => filter.Inject());
-        }
-
-        return Enumerable.Empty<AppointmentDto>();
+        return await SearchAsync(c => regexFilter.Inject());
     }
 }

@@ -71,18 +71,14 @@ public class TreatmentService : BaseService<Treatment, TreatmentDto>
 
     public async Task<IEnumerable<TreatmentDto>> SearchTreatmentsAsync(SearchCriteriaDto criteria)
     {
-        var filter = criteria.Field switch
-        {
-            "Name" => Builders<Treatment>.Filter.Eq(c => c.Name,criteria.Value),
-            _ =>  Builders<Treatment>.Filter.Eq("_id", ObjectId.Parse(criteria.Value)),
+        var regexFilter = criteria.Field switch
+        {       
+            "name" => Builders<Treatment>.Filter.Regex(c => c.Name,
+                new BsonRegularExpression(criteria.Value, "i")),
+            _ => Builders<Treatment>.Filter.Eq("_id", ObjectId.Parse(criteria.Value))
         };
 
-        if (filter != null)
-        {
-            return await SearchAsync(c => filter.Inject());
-        }
-
-        return Enumerable.Empty<TreatmentDto>();
+        return await SearchAsync(c => regexFilter.Inject());
     }
 
     public async Task<IEnumerable<TreatmentDto>> GetTreatmentsByCategoryAsync(string category)
@@ -95,7 +91,6 @@ public class TreatmentService : BaseService<Treatment, TreatmentDto>
 
         return await SearchAsync(p => p.Category == parsedCategory);
     }
-
 
     public async Task<IEnumerable<TreatmentDto>> GetTreatmentsByPriceRangeAsync(decimal minPrice, decimal maxPrice)
         => await SearchAsync(p => p.Price >= minPrice && p.Price <= maxPrice);

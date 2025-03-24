@@ -48,12 +48,12 @@ public class DoctorService : BaseService<Doctor, DoctorDto>
         string orderBy,
         bool ascending = true)
     {
-        
+
         Expression<Func<Doctor, object>> orderByExpression = orderBy switch
         {
             "firstName" => d => d.FirstName,
             "lastName" => d => d.LastName,
-            "Specialization" => d => d.Specialization,
+            "specialization" => d => d.Specialization,
             "createdAt" => d => d.CreatedAt,
             _ => d => d.Id
         };
@@ -72,19 +72,18 @@ public class DoctorService : BaseService<Doctor, DoctorDto>
 
     public async Task<IEnumerable<DoctorDto>> SearchDoctorsAsync(SearchCriteriaDto criteria)
     {
-        var filter = criteria.Field switch
+
+        var regexFilter = criteria.Field switch
         {
-            "firstName" => Builders<Doctor>.Filter.Eq(c => c.FirstName,criteria.Value),
-            "lastName" => Builders<Doctor>.Filter.Eq(c => c.LastName,criteria.Value),
-            "specialization" => Builders<Doctor>.Filter.Eq(c => c.Specialization,criteria.Value),
-            _ =>  Builders<Doctor>.Filter.Eq("_id", ObjectId.Parse(criteria.Value)),
+            "firstName" => Builders<Doctor>.Filter.Regex(c => c.FirstName,
+                new BsonRegularExpression(criteria.Value, "i")),
+            "lastName" => Builders<Doctor>.Filter.Regex(c => c.LastName,
+                new BsonRegularExpression(criteria.Value, "i")),
+            "specialization" => Builders<Doctor>.Filter.Regex(c => c.Specialization,
+                new BsonRegularExpression(criteria.Value, "i")),
+            _ => Builders<Doctor>.Filter.Eq("_id", ObjectId.Parse(criteria.Value))
         };
 
-        if (filter != null)
-        {
-            return await SearchAsync(c => filter.Inject());
-        }
-
-        return Enumerable.Empty<DoctorDto>();
+        return await SearchAsync(c => regexFilter.Inject());
     }
 }
