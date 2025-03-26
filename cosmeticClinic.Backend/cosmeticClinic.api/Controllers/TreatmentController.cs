@@ -5,7 +5,7 @@ using cosmeticClinic.DTOs.Product;
 using cosmeticClinic.Settings;
 using cosmeticClinic.Settings.Authorization;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc; 
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace cosmeticClinic.Backend.Controllers;
@@ -76,6 +76,17 @@ public class TreatmentsController : BaseController
             $"Successfully retrieved Treatment with ID: {id}");
     }
     
+    
+    [HttpGet("getByCategory")]
+    [RequirePermission(Permission.ViewTreatments)]
+    [SwaggerOperation(Summary = "Get all Treatments By Category")]
+    [SwaggerResponse(StatusCodes.Status200OK, "Returns all Treatments By Category", typeof(IEnumerable<TreatmentDto>))]
+    public async Task<ActionResult<IEnumerable<TreatmentDto>>> GetTreatmentsByCategory([SwaggerParameter("Get Treatments By Category Available Categories  :    FacialTreatments,\n    LaserTreatments,\n    Injectables,\n    BodyContouring,\n    SkinRejuvenation,\n    HairTreatments,\n    AcneTreatments,\n    AntiAgingTreatments,\n    PigmentationTreatments,\n    PostSurgeryCare") ]string category)
+    {
+        return await HandleResponse(
+            () => _TreatmentService.GetTreatmentsByCategoryAsync(category),
+            "Successfully retrieved all Treatments");
+    }
     
     [HttpPost("search")]
     [RequirePermission(Permission.ViewTreatments)]

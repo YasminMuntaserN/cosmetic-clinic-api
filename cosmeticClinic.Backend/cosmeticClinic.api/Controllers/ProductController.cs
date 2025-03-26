@@ -38,6 +38,16 @@ public class ProductsController : BaseController
             "Successfully retrieved all Products");
     }
     
+    [HttpGet("getByCategory")]
+    [RequirePermission(Permission.ViewProducts)]
+    [SwaggerOperation(Summary = "Get all Products By Category")]
+    [SwaggerResponse(StatusCodes.Status200OK, "Returns all Products By Category", typeof(IEnumerable<ProductDto>))]
+    public async Task<ActionResult<IEnumerable<ProductDto>>> GetProductsByCategory([SwaggerParameter("Get Products By Category Available Categories  :\n    Skincare,\n    Haircare,\n    Bodycare,\n    SunProtection,\n    AcneTreatment,\n    Brightening,\n    LipCare,\n    EyeCare,\n    PostTreatmentCare") ]string category)
+    {
+        return await HandleResponse(
+            () => _ProductService.GetProductsByCategoryAsync(category),
+            "Successfully retrieved all Products");
+    }
     
     [HttpGet("paginated")]
     [RequirePermission(Permission.ViewProducts)]
@@ -129,8 +139,5 @@ public class ProductsController : BaseController
             () => _ProductService.SoftDeleteProductAsync(id),
             $"Successfully deleted Product with ID: {id}");
     }
-
-
-
 
 }

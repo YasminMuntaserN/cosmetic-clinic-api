@@ -13,5 +13,13 @@ public class PatientMappingProfile: Profile
         CreateMap<PatientDto,Patient>();
 
         CreateMap<Patient, PatientDto>();
+        
+        CreateMap<Address, AddressDto>();
+        
+        CreateMap<AddressDto ,Address>();
+        
+        CreateMap<MedicalHistory, MedicalHistoryDto>();
+        
+        CreateMap<MedicalHistoryDto ,MedicalHistory>();
     }
 }
