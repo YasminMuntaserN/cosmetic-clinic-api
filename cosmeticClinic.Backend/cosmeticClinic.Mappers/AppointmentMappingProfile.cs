@@ -13,5 +13,10 @@ public class AppointmentMappingProfile: Profile
         CreateMap<AppointmentDto,Appointment>();
 
         CreateMap<Appointment, AppointmentDto>();
+        
+        CreateMap<Appointment, AppointmentDetailsDto>()
+            .ForMember(dest => dest.PatientName, opt => opt.Ignore())
+            .ForMember(dest => dest.DoctorName, opt => opt.Ignore())
+            .ForMember(dest => dest.TreatmentName, opt => opt.Ignore());
     }
 }

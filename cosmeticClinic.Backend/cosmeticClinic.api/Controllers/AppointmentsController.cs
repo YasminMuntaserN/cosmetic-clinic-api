@@ -30,8 +30,8 @@ public class AppointmentsController : BaseController
     [HttpGet]
     [RequirePermission(Permission.ViewAppointments)]
     [SwaggerOperation(Summary = "Get all Appointments")]
-    [SwaggerResponse(StatusCodes.Status200OK, "Returns all Appointments", typeof(IEnumerable<AppointmentDto>))]
-    public async Task<ActionResult<IEnumerable<AppointmentDto>>> GetAll()
+    [SwaggerResponse(StatusCodes.Status200OK, "Returns all Appointments", typeof(IEnumerable<AppointmentDetailsDto>))]
+    public async Task<ActionResult<IEnumerable<AppointmentDetailsDto>>> GetAll()
     {
         return await HandleResponse(
             () => _AppointmentService.GetAllAppointmentsAsync(),
