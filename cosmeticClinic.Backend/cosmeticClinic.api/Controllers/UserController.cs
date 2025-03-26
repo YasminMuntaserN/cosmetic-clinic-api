@@ -77,7 +77,7 @@ public class UsersController : BaseController
     }
     
     
-    [HttpGet("search")]
+    [HttpPost("search")]
     [RequirePermission(Permission.ManageUsers)]
     [SwaggerOperation(Summary = "Search Users  using specified criteria." ,
         Description = " Available search fields:firstName, lastName, email")]

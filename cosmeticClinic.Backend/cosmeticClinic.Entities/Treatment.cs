@@ -18,7 +18,7 @@ public class Treatment
     [BsonElement("category")]
     public TreatmentCategory Category { get; set; } 
 
-    [BsonElement("duration")]
+    [BsonElement("durationMinutes")]
     public int DurationMinutes { get; set; }
 
     [BsonElement("price")]
