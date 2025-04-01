@@ -4,6 +4,7 @@ using cosmeticClinic.Business.Base;
 using cosmeticClinic.DTOs.Common;
 using cosmeticClinic.DTOs.Doctor;
 using cosmeticClinic.Entities;
+using cosmeticClinic.Settings;
 using FluentValidation;
 using Microsoft.Extensions.Logging;
 using MongoDB.Bson;
@@ -17,21 +18,71 @@ public class DoctorService : BaseService<Doctor, DoctorDto>
     private readonly ILogger<DoctorService> _logger;
     private readonly IMapper _mapper;
     private readonly IValidator<Doctor> _validator;
-
+    private readonly IMongoCollection<Doctor> _collection;
+    private readonly IMongoCollection<User> _userCollection;
+    private readonly PasswordSettings _passwordSettings;
+    private readonly EmailService _emailService;
     public DoctorService(
         IMongoDatabase database,
         ILogger<DoctorService> logger,
         IMapper mapper,
+        PasswordSettings passwordSettings,
+        EmailService emailService,
         IValidator<Doctor> validator)
         : base(database, "doctors", logger, mapper, validator)
     {
+        _collection =database.GetCollection<Doctor>("doctors");
+        _userCollection = database.GetCollection<User>("users");
         _logger = logger;
         _mapper = mapper;
         _validator = validator;
+        _emailService = emailService;
+        _passwordSettings = passwordSettings;
     }
-
     public async Task<DoctorDto> AddDoctorAsync(DoctorCreateDto doctorCreateDto)
-        => await AddAsync(doctorCreateDto, "Doctor");
+    { 
+        try
+        {
+            var entity = _mapper.Map<Doctor>(doctorCreateDto);
+
+            var validationResult = await _validator.ValidateAsync(entity);
+            if (!validationResult.IsValid)
+            {
+                _logger.LogError("Validation failed while creating new Doctor: {Errors}", string.Join(", ", validationResult.Errors.Select(e => e.ErrorMessage)));
+                throw new ValidationException(validationResult.Errors.ToString());
+            }
+
+            //default password
+            var password = "Password";
+            
+            var user = new User
+            {
+                Email = doctorCreateDto.Email,
+                PasswordHash = _passwordSettings.HashPassword(password),
+                FirstName = doctorCreateDto.FirstName,
+                LastName = doctorCreateDto.LastName,
+                Role = "Doctor",
+                CreatedAt = DateTime.UtcNow,
+                IsActive = true,
+                Status = UserStatus.Offline
+            };
+
+            await _userCollection.InsertOneAsync(user);
+            
+            entity.UserId = user.Id;
+            
+            await _collection.InsertOneAsync(entity);
+            
+            await _emailService.SendAccountCreatedEmail(entity.UserId  ,entity.Email);
+            
+            return _mapper.Map<DoctorDto>(entity);
+        }
+        catch (Exception ex)
+        {        Console.WriteLine($"Error creating new  +{ex.Message}");
+            _logger.LogError(ex, "Error creating new Doctor");
+            throw;
+        }
+    }
 
     public async Task<DoctorDto?> UpdateDoctorAsync(string id, DoctorDto doctorDto)
         => await UpdateAsync(id, doctorDto, "Doctor");
@@ -42,6 +93,16 @@ public class DoctorService : BaseService<Doctor, DoctorDto>
     public async Task<IEnumerable<DoctorDto>> GetAllDoctorsAsync()
         => await GetAllAsync();
 
+    public async Task<IEnumerable<string>> GetAllDoctorsNamesAsync()
+    {
+        var doctorNames = await _collection
+            .Find(_ => true) 
+            .Project(d => d.FirstName+ " " + d.LastName) 
+            .ToListAsync();
+
+        return doctorNames;
+    }
+    
     public async Task<PaginatedResponseDto<DoctorDto>> GetAllDoctorsAsync(
         int pageNumber,
         int pageSize,

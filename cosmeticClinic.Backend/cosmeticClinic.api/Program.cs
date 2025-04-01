@@ -3,11 +3,11 @@ using cosmeticClinic.Business;
 using cosmeticClinic.Mappers;
 using cosmeticClinic.Settings;
 using cosmeticClinic.Settings.Authorization;
+using cosmeticClinic.Settings.Hubs;
 using cosmeticClinic.Validation;
-using FluentValidation.AspNetCore;
+using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using MongoDB.Driver;
 
@@ -17,17 +17,20 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerConfig();
 
+// Add SignalR
+builder.Services.AddSignalR();
+
 builder.Services.AddSingleton<IMongoClient>(sp =>
 {
     var settings = builder.Configuration.GetSection("MongoDbSettings").Get<MongoDbSettings>();
-    return new MongoClient(settings.ConnectionString);
+    return new MongoClient(settings?.ConnectionString);
 });
 
 builder.Services.AddScoped<IMongoDatabase>(sp =>
 {
     var client = sp.GetRequiredService<IMongoClient>();
     var settings = builder.Configuration.GetSection("MongoDbSettings").Get<MongoDbSettings>();
-    return client.GetDatabase(settings.DatabaseName);
+    return client.GetDatabase(settings?.DatabaseName);
 });
 
 // Add AutoMapper
@@ -35,7 +38,7 @@ builder.Services.AddAutoMapper(typeof(UserMappingProfile).Assembly);
 
 //  FluentValidation
 // Register FluentValidation
-builder.Services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<UserValidator>());
+builder.Services.AddValidatorsFromAssemblyContaining<UserValidator>();
 
 // Register Services
 builder.Services.AddScoped<UserService>();
@@ -46,6 +49,8 @@ builder.Services.AddScoped<TreatmentService>();
 builder.Services.AddScoped<AppointmentService>();
 builder.Services.AddScoped<PasswordSettings>();
 builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<EmailService>();
+
 builder.Services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
 
 builder.Services.AddAuthorization(options =>
@@ -94,6 +99,12 @@ builder.Services.AddAuthorization(options =>
         policy => policy.Requirements.Add(new PermissionRequirement(Permission.DeleteTreatment)));
     options.AddPolicy(Permission.ViewTreatments.ToString(), 
         policy => policy.Requirements.Add(new PermissionRequirement(Permission.ViewTreatments)));
+    
+    
+    options.AddPolicy(Permission.ManageUsers.ToString(), 
+        policy => policy.Requirements.Add(new PermissionRequirement(Permission.ManageUsers)));
+    options.AddPolicy(Permission.ViewReports.ToString(), 
+         policy => policy.Requirements.Add(new PermissionRequirement(Permission.ViewReports)));
 });
 
 
@@ -140,6 +151,7 @@ app.UseHttpsRedirection();
 app.UseCors("AllowReactApp");
 app.UseAuthentication();
 app.UseAuthorization();
+app.MapHub<ChatHub>("/chatHub");
 app.MapControllers();
 
 app.Run();

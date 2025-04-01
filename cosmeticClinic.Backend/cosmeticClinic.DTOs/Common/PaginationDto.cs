@@ -26,7 +26,7 @@ public class PaginationDto
         Format = "string",
         Nullable = true
     )]
-    public string OrderBy { get; set; }
+    public string? OrderBy { get; set; }
 
     [SwaggerSchema(
         "Sort direction (true for ascending, false for descending)",

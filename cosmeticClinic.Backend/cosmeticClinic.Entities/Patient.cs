@@ -9,6 +9,11 @@ public class Patient
     [BsonRepresentation(BsonType.ObjectId)]
     public string Id { get; set; } = null!;
 
+    [BsonElement("userId")] 
+    [BsonRepresentation(BsonType.ObjectId)]
+    public string UserId { get; set; } = null!;
+
+    
     [BsonElement("firstName")]
     public string FirstName { get; set; } = null!;
 

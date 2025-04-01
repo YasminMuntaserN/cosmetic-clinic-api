@@ -37,7 +37,7 @@ public class DoctorsController : BaseController
             "Successfully retrieved all doctors");
     }
     
-    
+
     [HttpGet("paginated")]
     [RequirePermission(Permission.ViewDoctors)]
     [SwaggerOperation(Summary = "Get paginated doctors" ,
@@ -58,7 +58,7 @@ public class DoctorsController : BaseController
         }
         
         return await HandleResponse(
-            () => _doctorService.GetAllDoctorsAsync(pagination.PageNumber, pagination.PageSize, pagination.OrderBy, pagination.Ascending),
+            () => _doctorService.GetAllDoctorsAsync(pagination.PageNumber, pagination.PageSize, pagination?.OrderBy, pagination.Ascending),
             "Successfully retrieved paginated doctors");
     }
 
@@ -68,7 +68,7 @@ public class DoctorsController : BaseController
     [SwaggerOperation(Summary = "Get a doctor by ID")]
     [SwaggerResponse(StatusCodes.Status200OK, "Returns the requested doctor", typeof(DoctorDto))]
     [SwaggerResponse(StatusCodes.Status404NotFound, "Doctor not found")]
-    public async Task<ActionResult<DoctorDto>> GetById(string id)
+    public async Task<ActionResult<DoctorDto?>> GetById(string id)
     {
         return await HandleResponse(
             () => _doctorService.GetDoctorByIdAsync(id),
@@ -109,7 +109,7 @@ public class DoctorsController : BaseController
     [SwaggerOperation(Summary = "Update a doctor")]
     [SwaggerResponse(StatusCodes.Status200OK, "Doctor updated successfully", typeof(DoctorDto))]
     [SwaggerResponse(StatusCodes.Status404NotFound, "Doctor not found")]
-    public async Task<ActionResult<DoctorDto>> Update(string id, DoctorDto doctorDto)
+    public async Task<ActionResult<DoctorDto?>> Update(string id, DoctorDto doctorDto)
     {
         return await HandleResponse(
             () => _doctorService.UpdateDoctorAsync(id, doctorDto),
