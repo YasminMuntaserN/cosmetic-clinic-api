@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "zqVIxyoXHI0=",
+  "dgSpecHash": "bUO2XBEsp0Q=",
   "success": true,
   "projectFilePath": "C:\\Users\\TOP\\Desktop\\cosmeticsClinc\\cosmeticClinic.Backend\\cosmeticClinic.Business\\cosmeticClinic.Business.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\TOP\\.nuget\\packages\\automapper\\14.0.0\\automapper.14.0.0.nupkg.sha512",
     "C:\\Users\\TOP\\.nuget\\packages\\bcrypt.net\\0.1.0\\bcrypt.net.0.1.0.nupkg.sha512",
+    "C:\\Users\\TOP\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\TOP\\.nuget\\packages\\dnsclient\\1.6.1\\dnsclient.1.6.1.nupkg.sha512",
     "C:\\Users\\TOP\\.nuget\\packages\\fluentvalidation\\12.0.0-preview1\\fluentvalidation.12.0.0-preview1.nupkg.sha512",
     "C:\\Users\\TOP\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.2\\microsoft.extensions.dependencyinjection.abstractions.8.0.2.nupkg.sha512",

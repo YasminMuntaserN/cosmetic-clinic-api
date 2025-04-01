@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("cosmeticClinic.Entities")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+25a1290366e1fe022f8007b5cf648edf44629378")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fb06357bfc912c23b9139c5a646e138d902ff9d1")]
 [assembly: System.Reflection.AssemblyProductAttribute("cosmeticClinic.Entities")]
 [assembly: System.Reflection.AssemblyTitleAttribute("cosmeticClinic.Entities")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

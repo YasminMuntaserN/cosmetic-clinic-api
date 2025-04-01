@@ -38,6 +38,21 @@ public class AppointmentsController : BaseController
             "Successfully retrieved all Appointments");
     }
 
+    [HttpGet("TodaySchedule")]
+    [RequirePermission(Permission.ViewAppointments)]
+    [SwaggerOperation(Summary = "Get all Appointments")]
+    [SwaggerResponse(StatusCodes.Status200OK, "Returns all Appointments", typeof(IEnumerable<AppointmentDetailsDto>))]
+    public async Task<ActionResult<IEnumerable<AppointmentDetailsDto>>> GetTodaySchedule()
+    {
+        var startOfDay = DateTime.Today;
+        var endOfDay = startOfDay.AddDays(1).AddTicks(-1); 
+
+        return await HandleResponse(
+            () => _AppointmentService.GetAllAppointmentsAsync(a => 
+                a.ScheduledDateTime >= startOfDay && a.ScheduledDateTime <= endOfDay),
+            "Successfully retrieved today's Appointments");
+    }
+    
     [HttpGet("paginated")]
     [RequirePermission(Permission.ViewAppointments)]
     [SwaggerOperation(Summary = "Get paginated Appointments")]
@@ -51,7 +66,7 @@ public class AppointmentsController : BaseController
         }
 
         return await HandleResponse(
-            () => _AppointmentService.GetAllAppointmentsAsync(pagination.PageNumber, pagination.PageSize, pagination.OrderBy, pagination.Ascending),
+            () => _AppointmentService.GetAllAppointmentsAsync(pagination.PageNumber, pagination.PageSize, pagination?.OrderBy, pagination.Ascending),
             "Successfully retrieved paginated Appointments");
     }
 
@@ -60,7 +75,7 @@ public class AppointmentsController : BaseController
     [SwaggerOperation(Summary = "Get a Appointment by ID")]
     [SwaggerResponse(StatusCodes.Status200OK, "Returns the requested Appointment", typeof(AppointmentDto))]
     [SwaggerResponse(StatusCodes.Status404NotFound, "Appointment not found")]
-    public async Task<ActionResult<AppointmentDto>> GetById(string id)
+    public async Task<ActionResult<AppointmentDto?>> GetById(string id)
     {
         return await HandleResponse(
             () => _AppointmentService.GetAppointmentByIdAsync(id),
@@ -106,7 +121,7 @@ public class AppointmentsController : BaseController
     [SwaggerOperation(Summary = "Update a Appointment")]
     [SwaggerResponse(StatusCodes.Status200OK, "Appointment updated successfully", typeof(AppointmentDto))]
     [SwaggerResponse(StatusCodes.Status404NotFound, "Appointment not found")]
-    public async Task<ActionResult<AppointmentDto>> Update(string id, AppointmentDto appointmentDto)
+    public async Task<ActionResult<AppointmentDto?>> Update(string id, AppointmentDto appointmentDto)
     {
         return await HandleResponse(
             () => _AppointmentService.UpdateAppointmentAsync(id, appointmentDto),

@@ -44,12 +44,16 @@ public class AppointmentService : BaseService<Appointment, AppointmentDto>
     public async Task<AppointmentDto?> GetAppointmentByIdAsync(string id)
         => await FindBy(a => a.Id == id);
 
-public async Task<IEnumerable<AppointmentDetailsDto>> GetAllAppointmentsAsync()
-{
-    // Retrieve all appointments
-    var appointments = await _collection
-        .Find(a => !a.IsDeleted)
-        .ToListAsync();
+public async Task<IEnumerable<AppointmentDetailsDto>> GetAllAppointmentsAsync(Expression<Func<Appointment, bool>>? predicate = null)
+{ 
+    List<Appointment> appointments;
+    if (predicate != null)
+        appointments = await _collection.Find(predicate).ToListAsync();
+    else
+        appointments = await _collection.Find(a => !a.IsDeleted).ToListAsync();
+
+    if (!appointments.Any())
+        return new List<AppointmentDetailsDto>();
 
     // Get patient, doctor, and treatment information by ID
     var patientIds = appointments.Select(a => a.PatientId).Distinct().ToList();
@@ -88,7 +92,7 @@ public async Task<IEnumerable<AppointmentDetailsDto>> GetAllAppointmentsAsync()
             TreatmentName = treatment?.Name,
             ScheduledDateTime = a.ScheduledDateTime,
             DurationMinutes = a.DurationMinutes,
-            Status = a.Status,
+            Status = a.Status.ToString(),
             Notes = a.Notes,
             CancellationReason = a.CancellationReason,
             CreatedAt = a.CreatedAt,

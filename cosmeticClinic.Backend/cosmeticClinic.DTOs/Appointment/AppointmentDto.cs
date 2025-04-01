@@ -10,7 +10,7 @@ public class AppointmentDto
     public string TreatmentId { get; set; } = null!;
     public DateTime ScheduledDateTime { get; set; }
     public int DurationMinutes { get; set; }
-    public AppointmentStatus Status { get; set; }
+    public string? Status { get; set; }
     public string? Notes { get; set; }
     public string? CancellationReason { get; set; }
     public DateTime CreatedAt { get; set; }
