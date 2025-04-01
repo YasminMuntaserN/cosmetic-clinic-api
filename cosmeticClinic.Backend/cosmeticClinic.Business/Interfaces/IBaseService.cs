@@ -7,6 +7,7 @@ public interface IBaseService<TEntity, TDto> where TEntity : class where TDto : 
 {
     Task<TDto?> FindBy(Expression<Func<TEntity, bool>> predicate);
     Task<IEnumerable<TDto>> GetAllAsync();
+    Task<IEnumerable<TDto>> GetAllByAsync(Expression<Func<TEntity, bool>> predicate);
     Task<PaginatedResponseDto<TDto>> GetAllAsync(
         int pageNumber,
         int pageSize,

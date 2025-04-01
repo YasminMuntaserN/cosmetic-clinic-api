@@ -48,6 +48,20 @@ public abstract class BaseService<TEntity, TDto> : IBaseService<TEntity, TDto>
         }
     }
 
+    public async Task<IEnumerable<TDto>> GetAllByAsync(Expression<Func<TEntity, bool>> predicate)
+    {
+        try
+        {
+            var entities = await _collection.Find(predicate).ToListAsync();
+            return _mapper.Map<IEnumerable<TDto>>(entities);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error retrieving all entities");
+            throw;
+        }
+    }
+    
     public async Task<IEnumerable<TDto>> GetAllAsync()
     {
         try
@@ -61,7 +75,7 @@ public abstract class BaseService<TEntity, TDto> : IBaseService<TEntity, TDto>
             throw;
         }
     }
-
+    
     public async Task<PaginatedResponseDto<TDto>> GetAllAsync(
         int pageNumber,
         int pageSize,
