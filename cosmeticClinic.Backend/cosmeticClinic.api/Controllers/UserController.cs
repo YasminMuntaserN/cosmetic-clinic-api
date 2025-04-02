@@ -59,7 +59,7 @@ public class UsersController : BaseController
         }
         
         return await HandleResponse(
-            () => _userService.GetAllUsersAsync(pagination.PageNumber, pagination.PageSize, pagination.OrderBy, pagination.Ascending),
+            () => _userService.GetAllUsersAsync(pagination.PageNumber, pagination.PageSize, pagination?.OrderBy, pagination.Ascending),
             "Successfully retrieved paginated Users");
     }
 

@@ -25,4 +25,20 @@ public class User
     public DateTime? LastLogin { get; set; }
     [BsonElement("isActive")]
     public bool IsActive { get; set; }
+    
+    [BsonElement("status")]
+    public UserStatus Status { get; set; }
+
+    [BsonElement("lastSeen")]
+    public DateTime LastSeen { get; set; }
+    
+    [BsonElement("isDeleted")]
+    public bool? IsDeleted { get; set; } = false;
+}
+
+public enum UserStatus
+{
+    Offline,
+    Online,
+    Away
 }

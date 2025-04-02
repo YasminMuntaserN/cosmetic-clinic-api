@@ -11,4 +11,6 @@ public class UserDto
     public DateTime CreatedAt { get; set; }
     public DateTime? LastLogin { get; set; }
     public bool IsActive { get; set; }
+    public string? Status { get; set; }
+    public DateTime? LastSeen { get; set; }
 }
