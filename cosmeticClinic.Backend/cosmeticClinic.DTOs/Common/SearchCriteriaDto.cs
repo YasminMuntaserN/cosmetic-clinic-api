@@ -12,7 +12,7 @@ public class SearchCriteriaDto
         Format = "string",
         Nullable = false
     )]
-    public string Field { get; set; }
+    public string Field { get; set; } = null!;
 
     [Required(ErrorMessage = "Search value is required")]
     [StringLength(255, ErrorMessage = "Search value cannot exceed 255 characters")]
@@ -21,5 +21,5 @@ public class SearchCriteriaDto
         Format = "string",
         Nullable = false
     )]
-    public string Value { get; set; }
+    public string Value { get; set; } = null!;
 }

@@ -20,24 +20,26 @@ public class EmailService
         {
             string subject = "Your Yara Choice Clinic Account is Ready!";
             string emailBody = $@"
-                <html>
-                <body>
-                    <h1>Welcome to Yara Choice Clinic! 🎉</h1>
-                    <p>Your account has been successfully created.</p>
-                    <p>For security reasons, please change your password immediately by clicking the link below:</p>
-                    <a href='http://localhost:5173/{userId}' 
-                       style='
-                          display: inline-block;
-                          padding: 10px 20px;
-                          font-size: 16px;
-                          color: white;
-                          background-color: #FBD909;
-                          text-decoration: none;
-                          border-radius: 5px;'>
-                        Change Password
-                    </a>
-                </body>
-                </html>";
+                        <html>
+                        <body style='color: black; display: flex; justify-content: center; align-items: center; height: 100vh; flex-direction: column;'>
+                            <div style='text-align: center;'>
+                                <h1>Welcome to Yara Choice Clinic! 🎉</h1>
+                                <p>Your account has been successfully created.</p>
+                                <p>For security reasons, please change your password immediately by clicking the link below:</p>
+                                <a href='http://localhost:5173/{userId}' 
+                                   style='
+                                      display: inline-block;
+                                      padding: 10px 20px;
+                                      font-size: 16px;
+                                      color: white;
+                                      background-color: #FBD909;
+                                      text-decoration: none;
+                                      border-radius: 5px;'>
+                                    Change Password
+                                </a>
+                            </div>
+                        </body>
+                        </html>";
 
             using (var smtpClient = new SmtpClient(_emailSettings.Host, _emailSettings.Port))
             {
@@ -45,12 +47,12 @@ public class EmailService
                 smtpClient.EnableSsl = true;
 
                 using (var mail = new MailMessage
-                {
-                    From = new MailAddress(_emailSettings.Email),
-                    Subject = subject,
-                    Body = emailBody,
-                    IsBodyHtml = true
-                })
+                       {
+                           From = new MailAddress(_emailSettings.Email),
+                           Subject = subject,
+                           Body = emailBody,
+                           IsBodyHtml = true
+                       })
                 {
                     mail.To.Add(recipientEmail);
                     Console.WriteLine("📤 Sending email...");

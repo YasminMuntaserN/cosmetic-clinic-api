@@ -17,6 +17,7 @@ public class TreatmentService : BaseService<Treatment, TreatmentDto>
     private readonly ILogger<TreatmentService> _logger;
     private readonly IMapper _mapper;
     private readonly IValidator<Treatment> _validator;
+    private readonly IMongoCollection<Treatment> _collection;
 
     public TreatmentService(
         IMongoDatabase database,
@@ -25,6 +26,7 @@ public class TreatmentService : BaseService<Treatment, TreatmentDto>
         IValidator<Treatment> validator)
         : base(database, "treatments", logger, mapper, validator)
     {
+        _collection =database.GetCollection<Treatment>("treatments"); 
         _logger = logger;
         _mapper = mapper;
         _validator = validator;
@@ -39,6 +41,16 @@ public class TreatmentService : BaseService<Treatment, TreatmentDto>
     public async Task<TreatmentDto?> GetTreatmentByIdAsync(string id)
         => await FindBy(p => p.Id == id);
 
+    public async Task<IEnumerable<string>> GetAllTreatmentsNamesAsync()
+    {
+        var doctorNames = await _collection
+            .Find(_ => true) 
+            .Project(d => d.Name) 
+            .ToListAsync();
+
+        return doctorNames;
+    }
+    
     public async Task<IEnumerable<TreatmentDto>> GetAllTreatmentsAsync()
         => await GetAllAsync();
 
@@ -89,8 +101,11 @@ public class TreatmentService : BaseService<Treatment, TreatmentDto>
             return Enumerable.Empty<TreatmentDto>();
         }
 
+
         return await SearchAsync(p => p.Category == parsedCategory);
     }
+
+
 
     public async Task<IEnumerable<TreatmentDto>> GetTreatmentsByPriceRangeAsync(decimal minPrice, decimal maxPrice)
         => await SearchAsync(p => p.Price >= minPrice && p.Price <= maxPrice);

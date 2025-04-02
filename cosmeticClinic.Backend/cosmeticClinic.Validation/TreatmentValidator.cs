@@ -30,21 +30,15 @@ public class TreatmentValidator : AbstractValidator<Treatment>
             .GreaterThan(0)
             .WithMessage("Price cannot be negative");
 
-        RuleFor(x => x.RequiredEquipment)
-            .NotEmpty()
-            .WithMessage("At least one Required Equipment must be specified");
+
 
         RuleForEach(x => x.RequiredEquipment)
-            .NotEmpty()
             .MaximumLength(100)
             .WithMessage("Each Required Equipment must not be empty and must not exceed 100 characters");
         
-        RuleFor(x => x.AfterCare)
-            .NotEmpty()
-            .WithMessage("At least one After Care must be specified");
+
 
         RuleForEach(x => x.AfterCare)
-            .NotEmpty()
             .MaximumLength(100)
             .WithMessage("Each Required After Care must not be empty and must not exceed 100 characters");
         

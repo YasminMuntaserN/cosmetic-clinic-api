@@ -70,7 +70,7 @@ public class ProductsController : BaseController
         }
         
         return await HandleResponse(
-            () => _ProductService.GetAllProductsAsync(pagination.PageNumber, pagination.PageSize, pagination.OrderBy, pagination.Ascending),
+            () => _ProductService.GetAllProductsAsync(pagination.PageNumber, pagination.PageSize, pagination?.OrderBy, pagination.Ascending),
             "Successfully retrieved paginated Products");
     }
 
@@ -80,7 +80,7 @@ public class ProductsController : BaseController
     [SwaggerOperation(Summary = "Get a Product by ID")]
     [SwaggerResponse(StatusCodes.Status200OK, "Returns the requested Product", typeof(ProductDto))]
     [SwaggerResponse(StatusCodes.Status404NotFound, "Product not found")]
-    public async Task<ActionResult<ProductDto>> GetById(string id)
+    public async Task<ActionResult<ProductDto?>> GetById(string id)
     {
         return await HandleResponse(
             () => _ProductService.GetProductByIdAsync(id),
@@ -120,7 +120,7 @@ public class ProductsController : BaseController
     [SwaggerOperation(Summary = "Update a Product")]
     [SwaggerResponse(StatusCodes.Status200OK, "Product updated successfully", typeof(ProductDto))]
     [SwaggerResponse(StatusCodes.Status404NotFound, "Product not found")]
-    public async Task<ActionResult<ProductDto>> Update(string id, ProductDto ProductDto)
+    public async Task<ActionResult<ProductDto?>> Update(string id, ProductDto ProductDto)
     {
         return await HandleResponse(
             () => _ProductService.UpdateProductAsync(id, ProductDto),

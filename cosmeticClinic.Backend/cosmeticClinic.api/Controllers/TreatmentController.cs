@@ -59,7 +59,7 @@ public class TreatmentsController : BaseController
         }
         
         return await HandleResponse(
-            () => _TreatmentService.GetAllTreatmentsAsync(pagination.PageNumber, pagination.PageSize, pagination.OrderBy, pagination.Ascending),
+            () => _TreatmentService.GetAllTreatmentsAsync(pagination.PageNumber, pagination.PageSize, pagination?.OrderBy, pagination.Ascending),
             "Successfully retrieved paginated Treatments");
     }
 
@@ -69,7 +69,7 @@ public class TreatmentsController : BaseController
     [SwaggerOperation(Summary = "Get a Treatment by ID")]
     [SwaggerResponse(StatusCodes.Status200OK, "Returns the requested Treatment", typeof(TreatmentDto))]
     [SwaggerResponse(StatusCodes.Status404NotFound, "Treatment not found")]
-    public async Task<ActionResult<TreatmentDto>> GetById(string id)
+    public async Task<ActionResult<TreatmentDto?>> GetById(string id)
     {
         return await HandleResponse(
             () => _TreatmentService.GetTreatmentByIdAsync(id),
@@ -120,7 +120,7 @@ public class TreatmentsController : BaseController
     [SwaggerOperation(Summary = "Update a Treatment")]
     [SwaggerResponse(StatusCodes.Status200OK, "Treatment updated successfully", typeof(TreatmentDto))]
     [SwaggerResponse(StatusCodes.Status404NotFound, "Treatment not found")]
-    public async Task<ActionResult<TreatmentDto>> Update(string id, TreatmentDto TreatmentDto)
+    public async Task<ActionResult<TreatmentDto?>> Update(string id, TreatmentDto TreatmentDto)
     {
         return await HandleResponse(
             () => _TreatmentService.UpdateTreatmentAsync(id, TreatmentDto),

@@ -64,17 +64,3 @@ public static class SwaggerConfig
     }
 }
 
-/*public class SwaggerDocumentFilter : IDocumentFilter
-{
-    public void Apply(OpenApiDocument swaggerDoc, DocumentFilterContext context)
-    {
-        foreach (var path in swaggerDoc.Paths)
-        {
-            foreach (var operation in path.Value.Operations)
-            {
-                operation.Value.Tags.Clear();
-                operation.Value.Tags.Add(new OpenApiTag { Name = path.Key.Split('/')[2] });
-            }
-        }
-    }
-}*/
