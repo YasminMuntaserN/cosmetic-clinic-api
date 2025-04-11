@@ -115,6 +115,19 @@ public class UsersController : BaseController
             () => _userService.UpdateUserAsync(id, userDto),
             $"Successfully updated User with ID: {id}");
     }
+    
+    [HttpPut("")]
+    [RequirePermission(Permission.ManageUsers)]
+    [SwaggerOperation(Summary = "Change User Password ")]
+    [SwaggerResponse(StatusCodes.Status200OK, "User password Changed successfully", typeof(UserDto))]
+    [SwaggerResponse(StatusCodes.Status404NotFound, "User  password  not Changed")]
+    public async Task<ActionResult<bool>> ChangePassword(string userId, string currentPassword, string newPassword)
+    {
+        return await HandleResponse(
+            () => _userService.UpdatePasswordAsync(userId, currentPassword, newPassword),
+            "Successfully updated password for the user");
+    }
+
 
     [HttpDelete("{id}")]
     [RequirePermission(Permission.ManageUsers)]
