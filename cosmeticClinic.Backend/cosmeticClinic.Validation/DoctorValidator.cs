@@ -23,9 +23,8 @@ public class DoctorValidator : AbstractValidator<Doctor>
             .WithMessage("A valid email address is required");
 
         RuleFor(x => x.Phone)
-            .NotEmpty()
-            .Matches(@"^\+?[1-9]\d{1,14}$")
-            .WithMessage("Phone number must be in a valid international format");
+            .NotEmpty().WithMessage("Phone number is required")
+            .Matches(@"^\+?[1-9]\d{1,14}$").WithMessage("Phone number must be in a valid international format");
 
         RuleFor(x => x.Specialization)
             .NotEmpty()

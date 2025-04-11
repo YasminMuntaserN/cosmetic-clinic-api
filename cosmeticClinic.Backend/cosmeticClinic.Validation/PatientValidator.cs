@@ -23,9 +23,8 @@ public class PatientValidator : AbstractValidator<Patient>
             .WithMessage("A valid email address is required");
 
         RuleFor(x => x.Phone)
-            .NotEmpty()
-            .Matches(@"^\+?[1-9]\d{1,14}$")
-            .WithMessage("Phone number must be in a valid international format");
+            .NotEmpty().WithMessage("Phone number is required")
+            .Matches(@"^\+?[1-9]\d{1,14}$").WithMessage("Phone number must be in a valid international format");
 
         RuleFor(x => x.DateOfBirth)
             .NotEmpty()
@@ -42,7 +41,6 @@ public class PatientValidator : AbstractValidator<Patient>
             .WithMessage("Address is required");
 
         RuleFor(x => x.Address.Street)
-            .NotEmpty()
             .MaximumLength(100)
             .WithMessage("Street address is required and must not exceed 100 characters");
 
@@ -52,12 +50,10 @@ public class PatientValidator : AbstractValidator<Patient>
             .WithMessage("City is required and must not exceed 50 characters");
 
         RuleFor(x => x.Address.State)
-            .NotEmpty()
             .MaximumLength(50)
             .WithMessage("State is required and must not exceed 50 characters");
 
         RuleFor(x => x.Address.PostalCode)
-            .NotEmpty()
             .MaximumLength(20)
             .WithMessage("Postal code is required and must not exceed 20 characters");
 

@@ -39,7 +39,7 @@ public class Patient
     public List<MedicalHistory> MedicalHistory { get; set; } = new();
 
     [BsonElement("allergies")]
-    public List<string> Allergies { get; set; } = new();
+    public List<string>? Allergies { get; set; } = new();
 
     [BsonElement("emergencyContact")]
     public string EmergencyContact { get; set; } = null!;
@@ -57,16 +57,16 @@ public class Patient
 public class Address
 {
     [BsonElement("street")]
-    public string Street { get; set; } = null!;
+    public string? Street { get; set; }
 
     [BsonElement("city")]
     public string City { get; set; } = null!;
 
     [BsonElement("state")]
-    public string State { get; set; } = null!;
+    public string? State { get; set; }
 
     [BsonElement("postalCode")]
-    public string PostalCode { get; set; } = null!;
+    public string? PostalCode { get; set; }
 
     [BsonElement("country")]
     public string Country { get; set; } = null!;

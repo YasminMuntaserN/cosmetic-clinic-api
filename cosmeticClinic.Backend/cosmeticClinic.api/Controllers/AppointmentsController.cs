@@ -8,6 +8,7 @@ using cosmeticClinic.Settings;
 using cosmeticClinic.Settings.Authorization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace cosmeticClinic.Backend.Controllers;
@@ -82,6 +83,23 @@ public class AppointmentsController : BaseController
             $"Successfully retrieved Appointment with ID: {id}");
     }
 
+    [HttpGet("doctorId/{doctorId}")]
+    [RequirePermission(Permission.ViewAppointments)]
+    [SwaggerOperation(Summary = "Get a Doctor Appointments")]
+    [SwaggerResponse(StatusCodes.Status200OK, "Returns the requested Doctor Appointment", typeof(AppointmentDto))]
+    [SwaggerResponse(StatusCodes.Status404NotFound, "Appointment not found")]
+    public async Task<ActionResult<IEnumerable<AppointmentDetailsDto?>>> GetDoctorAppointments(string doctorId)
+    {
+        if (!ObjectId.TryParse(doctorId, out _))
+            return BadRequest("Invalid doctor ID");
+
+        return await HandleResponse(
+            () => _AppointmentService.GetAllAppointmentsAsync(a => a.DoctorId == doctorId),
+            $"Successfully retrieved appointments for Doctor ID: {doctorId}"
+        );
+    }
+    
+    
     [HttpPost("search")]
     [RequirePermission(Permission.ViewAppointments)]
     [SwaggerOperation(Summary = "Search Appointments using specified criteria.")]

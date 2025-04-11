@@ -10,3 +10,4 @@ C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Settin
 C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Settings\obj\Debug\net9.0\refint\cosmeticClinic.Settings.dll
 C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Settings\obj\Debug\net9.0\cosmeticClinic.Settings.pdb
 C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Settings\obj\Debug\net9.0\ref\cosmeticClinic.Settings.dll
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Settings\obj\Debug\net9.0\cosmeticClinic.Settings.sourcelink.json

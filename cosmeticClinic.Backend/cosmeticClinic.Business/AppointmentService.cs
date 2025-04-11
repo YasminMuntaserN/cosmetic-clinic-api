@@ -44,7 +44,7 @@ public class AppointmentService : BaseService<Appointment, AppointmentDto>
     public async Task<AppointmentDto?> GetAppointmentByIdAsync(string id)
         => await FindBy(a => a.Id == id);
 
-public async Task<IEnumerable<AppointmentDetailsDto>> GetAllAppointmentsAsync(Expression<Func<Appointment, bool>>? predicate = null)
+    public async Task<IEnumerable<AppointmentDetailsDto>> GetAllAppointmentsAsync(Expression<Func<Appointment, bool>>? predicate = null)
 { 
     List<Appointment> appointments;
     if (predicate != null)
@@ -104,7 +104,6 @@ public async Task<IEnumerable<AppointmentDetailsDto>> GetAllAppointmentsAsync(Ex
 }
 
 
-
     public async Task<PaginatedResponseDto<AppointmentDto>> GetAllAppointmentsAsync(
         int pageNumber,
         int pageSize,
@@ -148,4 +147,8 @@ public async Task<IEnumerable<AppointmentDetailsDto>> GetAllAppointmentsAsync(Ex
 
         return await SearchAsync(c => regexFilter.Inject());
     }
+
+    public async Task<IEnumerable<AppointmentDto>> getAllDoctorAppointments(string doctorId)
+    => await GetAllByAsync(x=>x.DoctorId == doctorId);
+
 }

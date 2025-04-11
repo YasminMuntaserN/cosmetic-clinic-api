@@ -13,3 +13,4 @@ C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.DTOs\o
 C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.DTOs\obj\Debug\net9.0\refint\cosmeticClinic.DTOs.dll
 C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.DTOs\obj\Debug\net9.0\cosmeticClinic.DTOs.pdb
 C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.DTOs\obj\Debug\net9.0\ref\cosmeticClinic.DTOs.dll
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.DTOs\obj\Debug\net9.0\cosmeticClinic.DTOs.sourcelink.json

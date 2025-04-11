@@ -15,3 +15,4 @@ C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Mapper
 C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Mappers\obj\Debug\net9.0\refint\cosmeticClinic.Mappers.dll
 C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Mappers\obj\Debug\net9.0\cosmeticClinic.Mappers.pdb
 C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Mappers\obj\Debug\net9.0\ref\cosmeticClinic.Mappers.dll
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Mappers\obj\Debug\net9.0\cosmeticClinic.Mappers.sourcelink.json

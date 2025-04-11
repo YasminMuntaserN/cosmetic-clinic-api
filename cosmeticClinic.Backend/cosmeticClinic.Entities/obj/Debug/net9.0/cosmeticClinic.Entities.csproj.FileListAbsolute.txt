@@ -10,3 +10,4 @@ C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Entiti
 C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Entities\obj\Debug\net9.0\refint\cosmeticClinic.Entities.dll
 C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Entities\obj\Debug\net9.0\cosmeticClinic.Entities.pdb
 C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Entities\obj\Debug\net9.0\ref\cosmeticClinic.Entities.dll
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Entities\obj\Debug\net9.0\cosmeticClinic.Entities.sourcelink.json

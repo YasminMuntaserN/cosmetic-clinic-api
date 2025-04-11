@@ -17,3 +17,4 @@ C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Busine
 C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Business\obj\Debug\net9.0\ref\cosmeticClinic.Business.dll
 C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Business\bin\Debug\net9.0\cosmeticClinic.Settings.dll
 C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Business\bin\Debug\net9.0\cosmeticClinic.Settings.pdb
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Business\obj\Debug\net9.0\cosmeticClinic.Business.sourcelink.json

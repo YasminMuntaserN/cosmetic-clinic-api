@@ -13,3 +13,4 @@ C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Valida
 C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Validation\obj\Debug\net9.0\refint\cosmeticClinic.Validation.dll
 C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Validation\obj\Debug\net9.0\cosmeticClinic.Validation.pdb
 C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Validation\obj\Debug\net9.0\ref\cosmeticClinic.Validation.dll
+C:\Users\TOP\Desktop\cosmeticsClinc\cosmeticClinic.Backend\cosmeticClinic.Validation\obj\Debug\net9.0\cosmeticClinic.Validation.sourcelink.json
