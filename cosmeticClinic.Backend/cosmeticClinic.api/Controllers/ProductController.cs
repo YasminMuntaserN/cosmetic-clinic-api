@@ -140,4 +140,27 @@ public class ProductsController : BaseController
             $"Successfully deleted Product with ID: {id}");
     }
 
+    [HttpGet("ProductsReports")]
+    [RequirePermission(Permission.ViewProducts)]
+    [SwaggerOperation(Summary = "Get a Products Report")]
+    [SwaggerResponse(StatusCodes.Status200OK, "Returns the  Products Report", typeof(ProductCategoryInfoDto))]
+    [SwaggerResponse(StatusCodes.Status404NotFound, "Product not found")]
+    public async Task<ActionResult<IEnumerable<ProductCategoryInfoDto?>>> GetCategoriesReport()
+    {
+        return await HandleResponse(
+            () => _ProductService.GetCategoriesReportAsync(),
+            $"Successfully retrieved Products report for categories");
+    }
+    
+        [HttpGet("StockQuantityReport")]
+        [RequirePermission(Permission.ViewProducts)]
+        [SwaggerOperation(Summary = "Get a StockQuantity  Report")]
+        [SwaggerResponse(StatusCodes.Status200OK, "Returns the  StockQuantity Report", typeof(ReportDto))]
+        [SwaggerResponse(StatusCodes.Status404NotFound, "Product not found")]
+        public async Task<ActionResult<IEnumerable<ReportDto?>>> GetStockQuantityReport()
+        {
+            return await HandleResponse(
+                () => _ProductService.GetStockQuantityReportAsync(),
+                $"Successfully retrieved Products report for categories");
+        }
 }

@@ -34,6 +34,7 @@ public class AuthService
 
     public async Task<AuthResponseDto> AuthenticateAsync(AuthRequestDto request)
     {
+        var users = _usersCollection.AsQueryable();
         var user = await _usersCollection.Find(x => x.Email == request.Email).FirstOrDefaultAsync();
         if (user == null || !_PasswordSettings.VerifyPassword(request.Password, user.PasswordHash))
             throw new UnauthorizedAccessException("Invalid email or password.");
@@ -72,7 +73,7 @@ public class AuthService
         };
     }
 
-    public async Task<(string AccessToken, string RefreshToken)> RefreshTokenAsync(string refreshToken)
+    public async Task<TokenResponseDto> RefreshTokenAsync(string refreshToken)
     {
         var authUser = await _authUsersCollection.Find(u => u.RefreshToken == refreshToken).FirstOrDefaultAsync();
         if (authUser == null || authUser.RefreshTokenExpiryTime <= DateTime.UtcNow)
@@ -88,7 +89,11 @@ public class AuthService
 
         await _authUsersCollection.UpdateOneAsync(u => u.AuthUserId == authUser.AuthUserId, updateDefinition);
 
-        return (newAccessToken, newRefreshToken);
+        return new TokenResponseDto
+        {
+            AccessToken = newAccessToken,
+            RefreshToken = newRefreshToken
+        };
     }
 
     private string GenerateJwtToken(User user)
@@ -143,33 +148,28 @@ public class AuthService
     private int GetPermissionsForRole(string role) => role switch
     {
         "Admin" => (int)(
-                         Permission.CreateDoctor |
-                         Permission.ViewDoctors |
-                         Permission.MangeDoctor |
-                         Permission.DeleteDoctor |
-                         
-                         Permission.ViewAppointments |
-                         Permission.CreateAppointment |
-                         Permission.MangeAppointment |
-                         Permission.CancelAppointment |
-                         
-                         Permission.ViewPatients |
-                         Permission.CreatePatient |
-                         Permission.MangePatient |
-                         Permission.DeletePatient |
-                         
-                         Permission.ViewTreatments |
-                         Permission.CreateTreatment |
-                         Permission.MangeTreatment |
-                         Permission.DeleteTreatment |
-                         
-                         Permission.ViewProducts |
-                         Permission.CreateProduct |
-                         Permission.MangeProduct |
-                         Permission.DeleteProduct |
-                         
-                         Permission.ViewReports |
-                         Permission.ManageUsers),
+            Permission.CreateDoctor |
+            Permission.ViewDoctors |
+            Permission.MangeDoctor |
+            Permission.DeleteDoctor |
+            Permission.ViewAppointments |
+            Permission.CreateAppointment |
+            Permission.MangeAppointment |
+            Permission.CancelAppointment |
+            Permission.ViewPatients |
+            Permission.CreatePatient |
+            Permission.MangePatient |
+            Permission.DeletePatient |
+            Permission.ViewTreatments |
+            Permission.CreateTreatment |
+            Permission.MangeTreatment |
+            Permission.DeleteTreatment |
+            Permission.ViewProducts |
+            Permission.CreateProduct |
+            Permission.MangeProduct |
+            Permission.DeleteProduct |
+            Permission.ViewReports |
+            Permission.ManageUsers),
 
         "Doctor" => (int)(Permission.ViewAppointments |
                           Permission.CreateAppointment |
@@ -184,6 +184,7 @@ public class AuthService
 
         "Patient" => (int)(Permission.ViewDoctors |
                            Permission.ViewProducts |
+                           Permission.ViewPatients |
                            Permission.ViewAppointments |
                            Permission.CreateAppointment |
                            Permission.CancelAppointment),

@@ -127,4 +127,44 @@ public class UserService : BaseService<User, UserDto>
 
         return Enumerable.Empty<UserDto>();
     }
+
+    public async Task<IEnumerable<ReportDto>> StatsCount()
+    {
+        IEnumerable<ReportDto> reportDtos = new List<ReportDto>();
+        var _appointments =_database.GetCollection<Appointment>("appointments");
+        var _doctors =_database.GetCollection<Doctor>("doctors");
+        var _patients =_database.GetCollection<Patient>("patients");
+        var _products =_database.GetCollection<Product>("products");
+        
+        long appointmentsCount = await _appointments.CountDocumentsAsync(x=>x.IsDeleted == false && x.Status != AppointmentStatus.Cancelled);
+        reportDtos.Append(new ReportDto()
+        {
+            Name = "appointments",
+            value = (int)appointmentsCount
+        });
+        
+        long doctorsCount = await _doctors.CountDocumentsAsync(x=>x.IsDeleted == false);
+        reportDtos.Append(new ReportDto()
+        {
+            Name = "doctors",
+            value = (int)doctorsCount
+        });
+
+        long patientsCount = await _patients.CountDocumentsAsync(x=>x.IsDeleted == false);
+        reportDtos.Append(new ReportDto()
+        {
+            Name = "patients",
+            value = (int)patientsCount
+        });
+
+        long productsCount = await _products.CountDocumentsAsync(x=>x.IsDeleted == false);
+        reportDtos.Append(new ReportDto()
+        {
+            Name = "products",
+            value = (int)productsCount
+        });
+        
+        return reportDtos;
+        
+    }
 }

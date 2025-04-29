@@ -21,6 +21,7 @@ public class AppointmentService : BaseService<Appointment, AppointmentDto>
     private readonly IMapper _mapper;
     private readonly IValidator<Appointment> _validator;
     private readonly IMongoCollection<Appointment> _collection;
+
     public AppointmentService(
         IMongoDatabase database,
         ILogger<AppointmentService> logger,
@@ -28,7 +29,7 @@ public class AppointmentService : BaseService<Appointment, AppointmentDto>
         IValidator<Appointment> validator)
         : base(database, "appointments", logger, mapper, validator)
     {
-        _collection =database.GetCollection<Appointment>("appointments"); 
+        _collection = database.GetCollection<Appointment>("appointments");
         _logger = logger;
         _mapper = mapper;
         _validator = validator;
@@ -44,64 +45,65 @@ public class AppointmentService : BaseService<Appointment, AppointmentDto>
     public async Task<AppointmentDto?> GetAppointmentByIdAsync(string id)
         => await FindBy(a => a.Id == id);
 
-    public async Task<IEnumerable<AppointmentDetailsDto>> GetAllAppointmentsAsync(Expression<Func<Appointment, bool>>? predicate = null)
-{ 
-    List<Appointment> appointments;
-    if (predicate != null)
-        appointments = await _collection.Find(predicate).ToListAsync();
-    else
-        appointments = await _collection.Find(a => !a.IsDeleted).ToListAsync();
-
-    if (!appointments.Any())
-        return new List<AppointmentDetailsDto>();
-
-    // Get patient, doctor, and treatment information by ID
-    var patientIds = appointments.Select(a => a.PatientId).Distinct().ToList();
-    var doctorIds = appointments.Select(a => a.DoctorId).Distinct().ToList();
-    var treatmentIds = appointments.Select(a => a.TreatmentId).Distinct().ToList();
-
-    var patients = await _database.GetCollection<Patient>("patients")
-        .Find(p => patientIds.Contains(p.Id))
-        .ToListAsync();
-
-    var doctors = await _database.GetCollection<Doctor>("doctors")
-        .Find(d => doctorIds.Contains(d.Id))
-        .ToListAsync();
-
-    var treatments = await _database.GetCollection<Treatment>("treatments")
-        .Find(t => treatmentIds.Contains(t.Id))
-        .ToListAsync();
-
-    // Create a dictionary for easy lookup by ID
-    var patientDictionary = patients.ToDictionary(p => p.Id.ToString(), p => p);
-    var doctorDictionary = doctors.ToDictionary(d => d.Id.ToString(), d => d);
-    var treatmentDictionary = treatments.ToDictionary(t => t.Id.ToString(), t => t);
-
-    // Combine appointment data with related patient, doctor, and treatment information
-    var appointmentDtos = appointments.Select(a =>
+    public async Task<IEnumerable<AppointmentDetailsDto>> GetAllAppointmentsAsync(
+        Expression<Func<Appointment, bool>>? predicate = null)
     {
-        var patient = patientDictionary.GetValueOrDefault(a.PatientId.ToString());
-        var doctor = doctorDictionary.GetValueOrDefault(a.DoctorId.ToString());
-        var treatment = treatmentDictionary.GetValueOrDefault(a.TreatmentId.ToString());
+        List<Appointment> appointments;
+        if (predicate != null)
+            appointments = await _collection.Find(predicate).ToListAsync();
+        else
+            appointments = await _collection.Find(a => !a.IsDeleted).ToListAsync();
 
-        return new AppointmentDetailsDto
+        if (!appointments.Any())
+            return new List<AppointmentDetailsDto>();
+
+        // Get patient, doctor, and treatment information by ID
+        var patientIds = appointments.Select(a => a.PatientId).Distinct().ToList();
+        var doctorIds = appointments.Select(a => a.DoctorId).Distinct().ToList();
+        var treatmentIds = appointments.Select(a => a.TreatmentId).Distinct().ToList();
+
+        var patients = await _database.GetCollection<Patient>("patients")
+            .Find(p => patientIds.Contains(p.Id))
+            .ToListAsync();
+
+        var doctors = await _database.GetCollection<Doctor>("doctors")
+            .Find(d => doctorIds.Contains(d.Id))
+            .ToListAsync();
+
+        var treatments = await _database.GetCollection<Treatment>("treatments")
+            .Find(t => treatmentIds.Contains(t.Id))
+            .ToListAsync();
+
+        // Create a dictionary for easy lookup by ID
+        var patientDictionary = patients.ToDictionary(p => p.Id.ToString(), p => p);
+        var doctorDictionary = doctors.ToDictionary(d => d.Id.ToString(), d => d);
+        var treatmentDictionary = treatments.ToDictionary(t => t.Id.ToString(), t => t);
+
+        // Combine appointment data with related patient, doctor, and treatment information
+        var appointmentDtos = appointments.Select(a =>
         {
-            Id = a.Id.ToString(),
-            PatientName = $"{patient?.FirstName} {patient?.LastName}",
-            DoctorName = $"{doctor?.FirstName} {doctor?.LastName}",
-            TreatmentName = treatment?.Name,
-            ScheduledDateTime = a.ScheduledDateTime,
-            DurationMinutes = a.DurationMinutes,
-            Status = a.Status.ToString(),
-            Notes = a.Notes,
-            CancellationReason = a.CancellationReason,
-            CreatedAt = a.CreatedAt,
-            UpdatedAt = a.UpdatedAt
-        };
-    }).ToList();
+            var patient = patientDictionary.GetValueOrDefault(a.PatientId.ToString());
+            var doctor = doctorDictionary.GetValueOrDefault(a.DoctorId.ToString());
+            var treatment = treatmentDictionary.GetValueOrDefault(a.TreatmentId.ToString());
 
-    return appointmentDtos;
-}
+            return new AppointmentDetailsDto
+            {
+                Id = a.Id.ToString(),
+                PatientName = $"{patient?.FirstName} {patient?.LastName}",
+                DoctorName = $"{doctor?.FirstName} {doctor?.LastName}",
+                TreatmentName = treatment?.Name,
+                ScheduledDateTime = a.ScheduledDateTime,
+                DurationMinutes = a.DurationMinutes,
+                Status = a.Status.ToString(),
+                Notes = a.Notes,
+                CancellationReason = a.CancellationReason,
+                CreatedAt = a.CreatedAt,
+                UpdatedAt = a.UpdatedAt
+            };
+        }).ToList();
+
+        return appointmentDtos;
+    }
 
 
     public async Task<PaginatedResponseDto<AppointmentDto>> GetAllAppointmentsAsync(
@@ -129,7 +131,7 @@ public class AppointmentService : BaseService<Appointment, AppointmentDto>
 
     public async Task<bool> ExistsAppointmentAsync(string id)
         => await ExistsAsync(id);
-    
+
 
     public async Task<IEnumerable<AppointmentDto>> GetAppointmentsByDateRangeAsync(DateTime startDate, DateTime endDate)
         => await SearchAsync(a => a.ScheduledDateTime >= startDate && a.ScheduledDateTime <= endDate);
@@ -149,6 +151,38 @@ public class AppointmentService : BaseService<Appointment, AppointmentDto>
     }
 
     public async Task<IEnumerable<AppointmentDto>> getAllDoctorAppointments(string doctorId)
-    => await GetAllByAsync(x=>x.DoctorId == doctorId);
+        => await GetAllByAsync(x => x.DoctorId == doctorId);
 
+    public async Task<IEnumerable<AppointmentDto>> getAllPatientAppointments(string patientId)
+        => await GetAllByAsync(x => x.PatientId == patientId);
+
+    public async Task<IEnumerable<AppointmentDto>> GetAppointmentsByTreatment(string treatmentId)
+        => await GetAllByAsync(x => x.TreatmentId == treatmentId);
+
+    public async Task<IEnumerable<AppointmentReportDto>> GetAppointmentsReport()
+    {
+        var results = await _collection.Aggregate()
+            .Group(a => new {
+                    Day = a.ScheduledDateTime.Date,
+                    Status = a.Status.ToString(),
+                },
+                g => new {
+                    Day = g.Key.Day,
+                    Status = g.Key.Status,
+                    Count = g.Count()
+                })
+            .Group(g => g.Day, g => new AppointmentReportDto
+            {
+                Day = g.Key,
+                Data = g.Select(x => new ReportDto
+                {
+                    Name = x.Status.ToString(),
+                    value = x.Count
+                }).ToList()
+            })
+            .ToListAsync();
+
+        return results.OrderBy(r => r.Day);
+    }
+    
 }

@@ -105,8 +105,25 @@ public class TreatmentService : BaseService<Treatment, TreatmentDto>
         return await SearchAsync(p => p.Category == parsedCategory);
     }
 
-
-
     public async Task<IEnumerable<TreatmentDto>> GetTreatmentsByPriceRangeAsync(decimal minPrice, decimal maxPrice)
         => await SearchAsync(p => p.Price >= minPrice && p.Price <= maxPrice);
+    
+    // by this method we will return the number of Treatments with each category 
+
+    public async Task<IEnumerable<TreatmentCategoryInfoDto>> GetCategoriesReportAsync()
+    {
+        var results = await _collection.Aggregate()
+         .Group(t => t.Category, g => new
+            {
+                CategoryName = g.Key,
+                Value = g.Count()
+            }).ToListAsync();
+        
+        return results.Select(r => new TreatmentCategoryInfoDto
+        {
+            CategoryName =r.CategoryName.ToString() ,
+            value = r.Value
+        });
+    }
+    
 }

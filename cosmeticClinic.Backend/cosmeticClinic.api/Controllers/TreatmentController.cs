@@ -139,7 +139,17 @@ public class TreatmentsController : BaseController
             $"Successfully deleted Treatment with ID: {id}");
     }
 
-
+    [HttpGet("TreatmentsReports")]
+    [RequirePermission(Permission.ViewTreatments)]
+    [SwaggerOperation(Summary = "Get a Treatments Report")]
+    [SwaggerResponse(StatusCodes.Status200OK, "Returns the  Treatments Report", typeof(TreatmentCategoryInfoDto))]
+    [SwaggerResponse(StatusCodes.Status404NotFound, "Treatment not found")]
+    public async Task<ActionResult<IEnumerable<TreatmentCategoryInfoDto?>>> GetCategoriesReport()
+    {
+        return await HandleResponse(
+            () => _TreatmentService.GetCategoriesReportAsync(),
+            $"Successfully retrieved Treatments report for categories");
+    }
 
 
 }

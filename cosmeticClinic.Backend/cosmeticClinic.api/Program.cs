@@ -13,7 +13,7 @@ using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers(); 
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerConfig();
 
@@ -55,56 +55,56 @@ builder.Services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler
 
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy(Permission.CreateAppointment.ToString(), 
+    options.AddPolicy(Permission.CreateAppointment.ToString(),
         policy => policy.Requirements.Add(new PermissionRequirement(Permission.CreateAppointment)));
-    options.AddPolicy(Permission.ViewAppointments.ToString(), 
+    options.AddPolicy(Permission.ViewAppointments.ToString(),
         policy => policy.Requirements.Add(new PermissionRequirement(Permission.ViewAppointments)));
-    options.AddPolicy(Permission.MangeAppointment.ToString(), 
+    options.AddPolicy(Permission.MangeAppointment.ToString(),
         policy => policy.Requirements.Add(new PermissionRequirement(Permission.MangeAppointment)));
-    options.AddPolicy(Permission.CancelAppointment.ToString(), 
+    options.AddPolicy(Permission.CancelAppointment.ToString(),
         policy => policy.Requirements.Add(new PermissionRequirement(Permission.CancelAppointment)));
-    
-    options.AddPolicy(Permission.CreateDoctor.ToString(), 
+
+    options.AddPolicy(Permission.CreateDoctor.ToString(),
         policy => policy.Requirements.Add(new PermissionRequirement(Permission.CreateDoctor)));
-    options.AddPolicy(Permission.MangeDoctor.ToString(), 
+    options.AddPolicy(Permission.MangeDoctor.ToString(),
         policy => policy.Requirements.Add(new PermissionRequirement(Permission.MangeDoctor)));
-    options.AddPolicy(Permission.DeleteDoctor.ToString(), 
+    options.AddPolicy(Permission.DeleteDoctor.ToString(),
         policy => policy.Requirements.Add(new PermissionRequirement(Permission.DeleteDoctor)));
-    options.AddPolicy(Permission.ViewDoctors.ToString(), 
+    options.AddPolicy(Permission.ViewDoctors.ToString(),
         policy => policy.Requirements.Add(new PermissionRequirement(Permission.ViewDoctors)));
-    
-    options.AddPolicy(Permission.CreatePatient.ToString(), 
+
+    options.AddPolicy(Permission.CreatePatient.ToString(),
         policy => policy.Requirements.Add(new PermissionRequirement(Permission.CreatePatient)));
-    options.AddPolicy(Permission.MangePatient.ToString(), 
+    options.AddPolicy(Permission.MangePatient.ToString(),
         policy => policy.Requirements.Add(new PermissionRequirement(Permission.MangePatient)));
-    options.AddPolicy(Permission.DeletePatient.ToString(), 
+    options.AddPolicy(Permission.DeletePatient.ToString(),
         policy => policy.Requirements.Add(new PermissionRequirement(Permission.DeletePatient)));
-    options.AddPolicy(Permission.ViewPatients.ToString(), 
+    options.AddPolicy(Permission.ViewPatients.ToString(),
         policy => policy.Requirements.Add(new PermissionRequirement(Permission.ViewPatients)));
-    
-    options.AddPolicy(Permission.CreateProduct.ToString(), 
+
+    options.AddPolicy(Permission.CreateProduct.ToString(),
         policy => policy.Requirements.Add(new PermissionRequirement(Permission.CreateProduct)));
-    options.AddPolicy(Permission.MangeProduct.ToString(), 
+    options.AddPolicy(Permission.MangeProduct.ToString(),
         policy => policy.Requirements.Add(new PermissionRequirement(Permission.MangeProduct)));
-    options.AddPolicy(Permission.DeleteProduct.ToString(), 
+    options.AddPolicy(Permission.DeleteProduct.ToString(),
         policy => policy.Requirements.Add(new PermissionRequirement(Permission.DeleteProduct)));
-    options.AddPolicy(Permission.ViewProducts.ToString(), 
+    options.AddPolicy(Permission.ViewProducts.ToString(),
         policy => policy.Requirements.Add(new PermissionRequirement(Permission.ViewProducts)));
-    
-    options.AddPolicy(Permission.CreateTreatment.ToString(), 
+
+    options.AddPolicy(Permission.CreateTreatment.ToString(),
         policy => policy.Requirements.Add(new PermissionRequirement(Permission.CreateTreatment)));
-    options.AddPolicy(Permission.MangeTreatment.ToString(), 
+    options.AddPolicy(Permission.MangeTreatment.ToString(),
         policy => policy.Requirements.Add(new PermissionRequirement(Permission.MangeTreatment)));
-    options.AddPolicy(Permission.DeleteTreatment.ToString(), 
+    options.AddPolicy(Permission.DeleteTreatment.ToString(),
         policy => policy.Requirements.Add(new PermissionRequirement(Permission.DeleteTreatment)));
-    options.AddPolicy(Permission.ViewTreatments.ToString(), 
+    options.AddPolicy(Permission.ViewTreatments.ToString(),
         policy => policy.Requirements.Add(new PermissionRequirement(Permission.ViewTreatments)));
-    
-    
-    options.AddPolicy(Permission.ManageUsers.ToString(), 
+
+
+    options.AddPolicy(Permission.ManageUsers.ToString(),
         policy => policy.Requirements.Add(new PermissionRequirement(Permission.ManageUsers)));
-    options.AddPolicy(Permission.ViewReports.ToString(), 
-         policy => policy.Requirements.Add(new PermissionRequirement(Permission.ViewReports)));
+    options.AddPolicy(Permission.ViewReports.ToString(),
+        policy => policy.Requirements.Add(new PermissionRequirement(Permission.ViewReports)));
 });
 
 
@@ -130,7 +130,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowReactApp",
         builder =>
         {
-            builder.WithOrigins("http://localhost:5173") 
+            builder.WithOrigins("http://localhost:5173")
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowCredentials();
@@ -140,12 +140,9 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
+
 
 app.UseHttpsRedirection();
 app.UseCors("AllowReactApp");
@@ -155,4 +152,3 @@ app.MapHub<ChatHub>("/chatHub");
 app.MapControllers();
 
 app.Run();
-

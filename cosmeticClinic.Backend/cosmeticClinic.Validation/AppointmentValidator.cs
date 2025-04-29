@@ -21,7 +21,7 @@ public class AppointmentValidator : AbstractValidator<Appointment>
 
         RuleFor(x => x.ScheduledDateTime)
             .NotEmpty()
-            .GreaterThan(DateTime.UtcNow)
+            .GreaterThanOrEqualTo(DateTime.UtcNow)
             .WithMessage("Scheduled date and time must be in the future");
 
         RuleFor(x => x.DurationMinutes)

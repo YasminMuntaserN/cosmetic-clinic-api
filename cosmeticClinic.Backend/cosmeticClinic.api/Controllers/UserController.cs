@@ -92,7 +92,7 @@ public class UsersController : BaseController
     
     
     [HttpPost]
-    [AllowAnonymous]
+    [RequirePermission(Permission.ManageUsers)]
     [SwaggerOperation(Summary = "Create a new User")]
     [SwaggerResponse(StatusCodes.Status200OK, "User created successfully", typeof(UserDto))]
     [SwaggerResponse(StatusCodes.Status400BadRequest, "Invalid input")]
@@ -142,6 +142,16 @@ public class UsersController : BaseController
     }
 
 
+    [HttpGet("counts")]
+    [RequirePermission(Permission.ManageUsers)]
+    [SwaggerOperation(Summary = "Get all Data Counts")]
+    [SwaggerResponse(StatusCodes.Status200OK, "Returns all Stats Counts", typeof(IEnumerable<ReportDto>))]
+    public async Task<ActionResult<IEnumerable<ReportDto>>> StatsCount()
+    {
+        return await HandleResponse(
+            () => _userService.StatsCount(),
+            "Successfully retrieved all Stats Count");
+    }
 
 
 }

@@ -99,6 +99,39 @@ public class AppointmentsController : BaseController
         );
     }
     
+    [HttpGet("patientId/{patientId}")]
+    [RequirePermission(Permission.ViewAppointments)]
+    [SwaggerOperation(Summary = "Get a patient Appointments")]
+    [SwaggerResponse(StatusCodes.Status200OK, "Returns the requested patient Appointment", typeof(AppointmentDto))]
+    [SwaggerResponse(StatusCodes.Status404NotFound, "Appointment not found")]
+    public async Task<ActionResult<IEnumerable<AppointmentDetailsDto?>>> GetPatientAppointments(string patientId)
+    {
+        if (!ObjectId.TryParse(patientId, out _))
+            return BadRequest("Invalid patient ID");
+
+        return await HandleResponse(
+            () => _AppointmentService.GetAllAppointmentsAsync(a => a.PatientId == patientId),
+            $"Successfully retrieved appointments for patient ID: {patientId}"
+        );
+    }
+    
+    
+    [HttpGet("treatmentId/{treatmentId}")]
+    [RequirePermission(Permission.ViewAppointments)]
+    [SwaggerOperation(Summary = "Get a treatment Appointments")]
+    [SwaggerResponse(StatusCodes.Status200OK, "Returns the requested treatment Appointment", typeof(AppointmentDto))]
+    [SwaggerResponse(StatusCodes.Status404NotFound, "Appointment not found")]
+    public async Task<ActionResult<IEnumerable<AppointmentDetailsDto?>>> GetAppointmentsByTreatment(string treatmentId)
+    {
+        if (!ObjectId.TryParse(treatmentId, out _))
+            return BadRequest("Invalid treatment ID");
+
+        return await HandleResponse(
+            () => _AppointmentService.GetAllAppointmentsAsync(a => a.TreatmentId == treatmentId),
+            $"Successfully retrieved appointments for treatment ID: {treatmentId}"
+        );
+    }
+    
     
     [HttpPost("search")]
     [RequirePermission(Permission.ViewAppointments)]
@@ -156,5 +189,17 @@ public class AppointmentsController : BaseController
         return await HandleResponse(
             () => _AppointmentService.SoftDeleteAppointmentAsync(id),
             $"Successfully deleted Appointment with ID: {id}");
+    }
+    
+    [HttpGet("AppointmentsReports")]
+    [RequirePermission(Permission.ViewAppointments)]
+    [SwaggerOperation(Summary = "Get a Appointments Report")]
+    [SwaggerResponse(StatusCodes.Status200OK, "Returns the  Appointments Report", typeof(AppointmentReportDto))]
+    [SwaggerResponse(StatusCodes.Status404NotFound, "Appointment not found")]
+    public async Task<ActionResult<IEnumerable<AppointmentReportDto?>>> GetCategoriesReport()
+    {
+        return await HandleResponse(
+            () => _AppointmentService.GetAppointmentsReport(),
+            $"Successfully retrieved Appointments report ");
     }
 }

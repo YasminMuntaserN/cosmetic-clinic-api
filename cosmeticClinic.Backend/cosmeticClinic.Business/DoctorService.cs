@@ -39,6 +39,7 @@ public class DoctorService : BaseService<Doctor, DoctorDto>
         _emailService = emailService;
         _passwordSettings = passwordSettings;
     }
+    
     public async Task<DoctorDto> AddDoctorAsync(DoctorCreateDto doctorCreateDto)
     { 
         try

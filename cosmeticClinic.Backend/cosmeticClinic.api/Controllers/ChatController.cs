@@ -54,6 +54,7 @@ public class ChatController : BaseController
         return Ok(_mapper.Map<IEnumerable<MessageDto>>(messages));
     }
 
+    
     [HttpGet("conversations/{userId}")]
     [SwaggerOperation(Summary = "Retrieve conversation history for a user")]
     [SwaggerResponse(StatusCodes.Status200OK, "Returns a list of conversations", typeof(IEnumerable<object>))]
@@ -91,7 +92,22 @@ public class ChatController : BaseController
 
         return Ok(result);
     }
+    
+    [HttpGet("unread-count")]
+    [SwaggerOperation(Summary = "Retrieve unread messages count for a user")]
+    [SwaggerResponse(StatusCodes.Status200OK, "Returns unread messages count", typeof(int))]
+    [SwaggerResponse(StatusCodes.Status400BadRequest, "Invalid user ID")]
+    public async Task<ActionResult<int>> GetUnreadMessagesCount(string userId)
+    {
+        if (string.IsNullOrWhiteSpace(userId))
+            return BadRequest("User ID is required.");
 
+        var messagesCount = await _MessageCollection
+            .CountAsync(m => (m.SenderId == userId || m.ReceiverId == userId) && !m.IsRead);
+
+        return Ok(messagesCount);
+    }
+    
     private string GetConversationKey(string senderId, string receiverId)
     {
         return string.Compare(senderId, receiverId) < 0

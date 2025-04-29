@@ -10,8 +10,8 @@ using ValidationException = System.ComponentModel.DataAnnotations.ValidationExce
 
 namespace cosmeticClinic.Business.Base;
 
-public abstract class BaseService<TEntity, TDto> : IBaseService<TEntity, TDto> 
-    where TEntity : class 
+public abstract class BaseService<TEntity, TDto> : IBaseService<TEntity, TDto>
+    where TEntity : class
     where TDto : class
 {
     private readonly IMongoDatabase _database;
@@ -52,7 +52,13 @@ public abstract class BaseService<TEntity, TDto> : IBaseService<TEntity, TDto>
     {
         try
         {
-            var entities = await _collection.Find(predicate).ToListAsync();
+            var builder = Builders<TEntity>.Filter;
+            var isNotDeletedFilter = builder.Eq("isDeleted", false);
+            var predicateFilter = builder.Where(predicate);
+            var combinedFilter = builder.And(isNotDeletedFilter, predicateFilter);
+
+            var entities = await _collection.Find(combinedFilter).ToListAsync();
+
             return _mapper.Map<IEnumerable<TDto>>(entities);
         }
         catch (Exception ex)
@@ -61,12 +67,13 @@ public abstract class BaseService<TEntity, TDto> : IBaseService<TEntity, TDto>
             throw;
         }
     }
-    
+
     public async Task<IEnumerable<TDto>> GetAllAsync()
     {
         try
         {
-            var entities = await _collection.Find(_ => true).ToListAsync();
+            var filter = Builders<TEntity>.Filter.Eq("isDeleted", false);
+            var entities = await _collection.Find(filter).ToListAsync();
             return _mapper.Map<IEnumerable<TDto>>(entities);
         }
         catch (Exception ex)
@@ -75,7 +82,7 @@ public abstract class BaseService<TEntity, TDto> : IBaseService<TEntity, TDto>
             throw;
         }
     }
-    
+
     public async Task<PaginatedResponseDto<TDto>> GetAllAsync(
         int pageNumber,
         int pageSize,
@@ -84,7 +91,7 @@ public abstract class BaseService<TEntity, TDto> : IBaseService<TEntity, TDto>
     {
         try
         {
-            var filter = Builders<TEntity>.Filter.Empty;
+            var filter = Builders<TEntity>.Filter.Eq("isDeleted", false);
             var totalCount = await _collection.CountDocumentsAsync(filter);
             var totalPages = (int)Math.Ceiling((double)totalCount / pageSize);
 
@@ -119,7 +126,7 @@ public abstract class BaseService<TEntity, TDto> : IBaseService<TEntity, TDto>
         {
             var entity = _mapper.Map<TEntity>(createDto);
 
-           var validationResult = await _validator.ValidateAsync(entity);
+            var validationResult = await _validator.ValidateAsync(entity);
             if (!validationResult.IsValid)
             {
                 _logger.LogError("Validation failed while creating new {EntityName}: {Errors}",
@@ -131,13 +138,14 @@ public abstract class BaseService<TEntity, TDto> : IBaseService<TEntity, TDto>
             return _mapper.Map<TDto>(entity);
         }
         catch (Exception ex)
-        {        Console.WriteLine($"Error creating new  +{ex.Message}");
+        {
+            Console.WriteLine($"Error creating new  +{ex.Message}");
             _logger.LogError(ex, "Error creating new {EntityName}", entityName);
             throw;
         }
     }
 
-    public  async Task<TDto?> UpdateAsync(string id, TDto dto, string entityName)
+    public async Task<TDto?> UpdateAsync(string id, TDto dto, string entityName)
     {
         try
         {
@@ -170,7 +178,7 @@ public abstract class BaseService<TEntity, TDto> : IBaseService<TEntity, TDto>
         }
     }
 
-    public  async Task<bool> SoftDeleteAsync(string id, string propertyName)
+    public async Task<bool> SoftDeleteAsync(string id, string propertyName)
     {
         try
         {
@@ -194,8 +202,8 @@ public abstract class BaseService<TEntity, TDto> : IBaseService<TEntity, TDto>
             throw;
         }
     }
-    
-    public  async Task<bool> HardDeleteAsync(string id)
+
+    public async Task<bool> HardDeleteAsync(string id)
     {
         try
         {
@@ -218,7 +226,7 @@ public abstract class BaseService<TEntity, TDto> : IBaseService<TEntity, TDto>
         }
     }
 
-    public  async Task<bool> HardDeleteByAsync(Expression<Func<TEntity, bool>> predicate)
+    public async Task<bool> HardDeleteByAsync(Expression<Func<TEntity, bool>> predicate)
     {
         try
         {
@@ -240,12 +248,16 @@ public abstract class BaseService<TEntity, TDto> : IBaseService<TEntity, TDto>
         }
     }
 
-    public  async Task<bool> ExistsAsync(string id)
+    public async Task<bool> ExistsAsync(string id)
     {
         try
         {
-            var filter = Builders<TEntity>.Filter.Eq("_id", ObjectId.Parse(id));
-            return await _collection.Find(filter).AnyAsync();
+            var builder = Builders<TEntity>.Filter;
+            var isNotDeletedFilter = builder.Eq("isDeleted", false);
+            var predicateFilter = builder.Eq("_id", ObjectId.Parse(id));
+            var combinedFilter = builder.And(isNotDeletedFilter, predicateFilter);
+
+            return await _collection.Find(combinedFilter).AnyAsync();
         }
         catch (Exception ex)
         {
@@ -254,11 +266,16 @@ public abstract class BaseService<TEntity, TDto> : IBaseService<TEntity, TDto>
         }
     }
 
-    public  async Task<bool> ExistsByAsync(Expression<Func<TEntity, bool>> predicate)
+    public async Task<bool> ExistsByAsync(Expression<Func<TEntity, bool>> predicate)
     {
         try
         {
-            return await _collection.Find(predicate).AnyAsync();
+            var builder = Builders<TEntity>.Filter;
+            var isNotDeletedFilter = builder.Eq("isDeleted", false);
+            var predicateFilter = builder.Where(predicate);
+            var combinedFilter = builder.And(isNotDeletedFilter, predicateFilter);
+
+            return await _collection.Find(combinedFilter).AnyAsync();
         }
         catch (Exception ex)
         {
@@ -271,12 +288,32 @@ public abstract class BaseService<TEntity, TDto> : IBaseService<TEntity, TDto>
     {
         try
         {
-            var entities = await _collection.Find(filter).ToListAsync();
+            var builder = Builders<TEntity>.Filter;
+            var isNotDeletedFilter = builder.Eq("isDeleted", false);
+            var predicateFilter = builder.Where(filter);
+            var combinedFilter = builder.And(isNotDeletedFilter, predicateFilter);
+
+            var entities = await _collection.Find(combinedFilter).ToListAsync();
             return _mapper.Map<IEnumerable<TDto>>(entities);
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error searching products");
+            throw;
+        }
+    }
+
+    public async Task<int> GetCount()
+    {
+        try
+        {
+            var filter = Builders<TEntity>.Filter.Eq("isDeleted", false);
+            var count = await _collection.CountDocumentsAsync(filter);
+            return (int)count;
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error retrieving all entities");
             throw;
         }
     }

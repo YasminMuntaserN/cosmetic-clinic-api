@@ -17,7 +17,8 @@ public class ProductService : BaseService<Product, ProductDto>
     private readonly ILogger<ProductService> _logger;
     private readonly IMapper _mapper;
     private readonly IValidator<Product> _validator;
-
+    private readonly IMongoCollection<Product> _collection;
+    
     public ProductService(
         IMongoDatabase database,
         ILogger<ProductService> logger,
@@ -28,6 +29,7 @@ public class ProductService : BaseService<Product, ProductDto>
         _logger = logger;
         _mapper = mapper;
         _validator = validator;
+        _collection= database.GetCollection<Product>("products");
     }
 
     public async Task<ProductDto> AddProductAsync(ProductCreateDto productCreateDto)
@@ -98,5 +100,36 @@ public class ProductService : BaseService<Product, ProductDto>
         };
 
         return await SearchAsync(p => regexFilter.Inject());
+    }
+    
+    // by this method we want to get number of products that follow each category 
+    public async Task<IEnumerable<ProductCategoryInfoDto>> GetCategoriesReportAsync()
+    {
+        var results = await _collection.Aggregate()
+            .Group(p => p.Category, g => new
+            {
+                CategoryName = g.Key,
+                Value = g.Count()
+            })
+            .ToListAsync();
+
+        return results.Select(r => new ProductCategoryInfoDto
+        {
+            CategoryName =r.CategoryName.ToString() ,
+            value = r.Value
+        });
+    }
+
+    public async Task<IEnumerable<ReportDto>> GetStockQuantityReportAsync()
+    {
+        var results = await _collection.Aggregate()
+            .Project(g => new ReportDto
+            {
+                Name = g.Name,
+                value = g.StockQuantity
+            })
+            .ToListAsync();
+
+        return results;
     }
 }

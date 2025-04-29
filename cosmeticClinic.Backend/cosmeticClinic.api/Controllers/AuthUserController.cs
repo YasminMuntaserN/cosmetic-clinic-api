@@ -44,7 +44,7 @@ public class AuthController : BaseController
     )]
     [SwaggerResponse(200, "Token refresh successful")]
     [SwaggerResponse(401, "Invalid or expired refresh token")]
-    public async Task<ActionResult<(string AccessToken, string RefreshToken)>>
+    public async Task<ActionResult<TokenResponseDto>>
         RefreshToken([FromBody] string refreshToken)
     {
         return await HandleResponse(
