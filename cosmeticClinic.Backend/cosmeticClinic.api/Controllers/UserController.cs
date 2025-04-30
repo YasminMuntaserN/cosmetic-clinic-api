@@ -143,7 +143,7 @@ public class UsersController : BaseController
 
 
     [HttpGet("counts")]
-    [RequirePermission(Permission.ManageUsers)]
+    [RequirePermission(Permission.ViewReports)]
     [SwaggerOperation(Summary = "Get all Data Counts")]
     [SwaggerResponse(StatusCodes.Status200OK, "Returns all Stats Counts", typeof(IEnumerable<ReportDto>))]
     public async Task<ActionResult<IEnumerable<ReportDto>>> StatsCount()
