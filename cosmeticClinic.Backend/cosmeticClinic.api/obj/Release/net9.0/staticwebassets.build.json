@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "RjPDxdg3ofXCHsZP/py6JVycIXKoUVjYsSYQ5ILabug=",
+  "Source": "cosmeticClinic.api",
+  "BasePath": "_content/cosmeticClinic.api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

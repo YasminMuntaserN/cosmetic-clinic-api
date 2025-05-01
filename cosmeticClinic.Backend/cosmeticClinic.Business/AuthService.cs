@@ -186,6 +186,8 @@ public class AuthService
                            Permission.ViewProducts |
                            Permission.ViewPatients |
                            Permission.ViewAppointments |
+                          Permission.ViewTreatments | 
+                           Permission.ViewReports |
                            Permission.CreateAppointment |
                            Permission.CancelAppointment),
 

@@ -19,11 +19,6 @@ public class AppointmentValidator : AbstractValidator<Appointment>
             .NotEmpty()
             .WithMessage("Treatment ID is required");
 
-        RuleFor(x => x.ScheduledDateTime)
-            .NotEmpty()
-            .GreaterThanOrEqualTo(DateTime.UtcNow)
-            .WithMessage("Scheduled date and time must be in the future");
-
         RuleFor(x => x.DurationMinutes)
             .GreaterThan(0)
             .LessThanOrEqualTo(480) 

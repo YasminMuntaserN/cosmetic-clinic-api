@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "nkPlTEKPkdXltNjaKrBmnRVcdKRAaetRiJIVJBbk91c=",
+  "Source": "cosmeticClinic.api",
+  "BasePath": "_content/cosmeticClinic.api",
+  "Mode": "Default",
+  "ManifestType": "Publish",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
